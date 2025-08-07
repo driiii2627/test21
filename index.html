@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameShare - Descubra e Compartilhe Jogos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --background-color: #0D1117;
+            --card-background: rgba(15, 23, 42, 0.6);
+            --glass-background: rgba(30, 41, 59, 0.5);
+            --text-primary: #E2E8F0;
+            --text-muted: #94A3B8;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --accent-violet: #8b5cf6;
+            --accent-blue: #3b82f6;
+        }
+        /* Tema Claro "Cinza Gamer" Aprimorado */
+        html.light {
+            --background-color: #e2e8f0; /* slate-200 */
+            --card-background: rgba(203, 213, 225, 0.6); /* slate-300 */
+            --glass-background: rgba(226, 232, 240, 0.7); /* slate-200 */
+            --text-primary: #1e293b; /* slate-800 */
+            --text-muted: #475569; /* slate-600 */
+            --border-color: rgba(148, 163, 184, 0.4); /* slate-400 */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 20px 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        html.light body {
+             background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.05) 1px, transparent 0);
+        }
+
+        .glass-effect {
+            background: var(--glass-background);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+        }
+        
+        .glass-card {
+            background: var(--card-background);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            transition: background 0.4s, transform 0.4s, box-shadow 0.4s, opacity 0.3s;
+            overflow: hidden;
+        }
+        .glass-card img {
+            transition: transform 0.4s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-8px);
+            background: rgba(30, 41, 59, 0.7);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(139, 92, 246, 0.3);
+        }
+        .glass-card:hover img {
+            transform: scale(1.05);
+        }
+        html.light .glass-card:hover {
+             background: rgba(203, 213, 225, 0.9);
+             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 12px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-gradient {
+            background-image: linear-gradient(to right, var(--accent-blue), var(--accent-violet));
+            transition: all 0.3s ease;
+        }
+        .btn-gradient:hover {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+        }
+        
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loader { animation: spin 1s linear infinite; }
+
+        .hero-background {
+            background: linear-gradient(-45deg, #0D1117, #1E293B, #3730A3, #0D1117);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        html.light .hero-background {
+            background: linear-gradient(-45deg, #e2e8f0, #cbd5e1, #94a3b8);
+        }
+        html.light .hero-background h1, html.light .hero-background p {
+            color: #0D1117;
+            text-shadow: none;
+        }
+
+        #searchInput {
+            width: 0;
+            padding-left: 0;
+            padding-right: 0;
+            opacity: 0;
+            transition: all 0.5s ease-in-out;
+            border: 1px solid transparent;
+        }
+        #searchInput.active {
+            width: 200px;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            opacity: 1;
+            border: 1px solid var(--border-color);
+        }
+        @media (max-width: 640px) {
+             #searchInput.active { width: 120px; }
+        }
+        
+        .category-filter.active {
+            background-color: var(--accent-violet);
+            color: white;
+        }
+        /* Hide scrollbar for category filter */
+        #category-filter-bar::-webkit-scrollbar {
+            display: none;
+        }
+        #category-filter-bar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="transition-colors duration-300">
+
+    <div id="app" class="w-full px-4 sm:px-6 lg:px-8">
+        <!-- Cabeçalho -->
+        <header class="glass-effect sticky top-4 z-40 flex justify-between items-center py-3 px-6 rounded-2xl mt-4">
+            <div class="flex items-center space-x-8">
+                <a href="#" id="homeLink" class="flex items-center space-x-2 cursor-pointer">
+                    <i data-lucide="gamepad-2" class="w-8 h-8 text-violet-400"></i>
+                    <span class="text-2xl font-bold text-inherit">GameShare</span>
+                </a>
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="#" class="nav-link text-muted hover:text-inherit font-medium transition-colors flex items-center space-x-2" data-page="page404" data-translate-key="nav_games"><i data-lucide="swords" class="w-4 h-4"></i><span>Games</span></a>
+                    <a href="#" class="nav-link text-muted hover:text-inherit font-medium transition-colors flex items-center space-x-2" data-page="page404" data-translate-key="nav_apks"><i data-lucide="smartphone" class="w-4 h-4"></i><span>APKs</span></a>
+                    <a href="#" class="nav-link text-muted hover:text-inherit font-medium transition-colors flex items-center space-x-2" data-page="announcementsPage" data-translate-key="nav_announcements"><i data-lucide="megaphone" class="w-4 h-4"></i><span>Anúncios</span></a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <div class="flex items-center">
+                    <input id="searchInput" type="text" placeholder="Pesquisar..." data-translate-key="search_placeholder" class="bg-transparent rounded-lg py-2 focus:outline-none focus:ring-2 focus:ring-violet-500">
+                    <button id="searchBtn" class="p-2 rounded-full hover:bg-slate-700 dark:hover:bg-slate-300 transition-colors">
+                        <i data-lucide="search" class="w-5 h-5 text-muted"></i>
+                    </button>
+                </div>
+                <!-- Language Selector -->
+                <div class="relative">
+                    <button id="langBtn" class="p-2 rounded-full hover:bg-slate-700 dark:hover:bg-slate-300 transition-colors">
+                        <i data-lucide="globe" class="w-5 h-5 text-muted"></i>
+                    </button>
+                    <div id="langMenu" class="hidden absolute right-0 mt-2 w-48 glass-effect rounded-lg shadow-lg py-1 z-50">
+                        <a href="#" class="lang-option flex justify-between items-center px-4 py-2 text-sm text-inherit hover:bg-slate-700 dark:hover:bg-slate-600" data-lang="pt">Português (BR)</a>
+                        <a href="#" class="lang-option flex justify-between items-center px-4 py-2 text-sm text-inherit hover:bg-slate-700 dark:hover:bg-slate-600" data-lang="en">English (US)</a>
+                        <a href="#" class="lang-option flex justify-between items-center px-4 py-2 text-sm text-inherit hover:bg-slate-700 dark:hover:bg-slate-600" data-lang="es">Español</a>
+                        <a href="#" class="lang-option flex justify-between items-center px-4 py-2 text-sm text-inherit hover:bg-slate-700 dark:hover:bg-slate-600" data-lang="ru">Русский</a>
+                    </div>
+                </div>
+                <button id="darkModeToggle" class="p-2 rounded-full hover:bg-slate-700 dark:hover:bg-slate-300 transition-colors">
+                     <!-- O ícone será inserido pelo JS -->
+                </button>
+                <button id="mobileMenuBtn" class="md:hidden p-2 rounded-full hover:bg-slate-700 dark:hover:bg-slate-300">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </header>
+        
+        <!-- Menu Mobile -->
+        <div id="mobileMenu" class="hidden md:hidden glass-effect rounded-2xl mt-2 p-4">
+             <a href="#" class="nav-link block text-muted hover:text-inherit py-2 flex items-center space-x-2" data-page="page404" data-translate-key="nav_games_mobile"><i data-lucide="swords" class="w-4 h-4"></i><span>Games</span></a>
+             <a href="#" class="nav-link block text-muted hover:text-inherit py-2 flex items-center space-x-2" data-page="page404" data-translate-key="nav_apks_mobile"><i data-lucide="smartphone" class="w-4 h-4"></i><span>APKs</span></a>
+             <a href="#" class="nav-link block text-muted hover:text-inherit py-2 flex items-center space-x-2" data-page="announcementsPage" data-translate-key="nav_announcements_mobile"><i data-lucide="megaphone" class="w-4 h-4"></i><span>Anúncios</span></a>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div id="mainContent">
+            <main class="mt-8">
+                <section class="hero-background rounded-2xl shadow-2xl p-8 md:p-16 text-center overflow-hidden">
+                    <h1 class="text-4xl md:text-6xl font-extrabold text-white drop-shadow-lg" data-translate-key="hero_title">Seu Universo de Descobertas</h1>
+                    <p class="mt-4 text-lg text-slate-300 max-w-2xl mx-auto" data-translate-key="hero_subtitle">Explore recomendações, encontre APKs e mergulhe em novas aventuras selecionadas pela comunidade.</p>
+                </section>
+                
+                <!-- Barra de Filtro de Categorias -->
+                <section class="mt-12 relative">
+                    <button id="scroll-left" class="absolute -left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-slate-800/50 hover:bg-slate-700/80 transition-opacity opacity-0 cursor-pointer hidden sm:flex items-center justify-center"><i data-lucide="chevron-left"></i></button>
+                    <div id="category-filter-bar" class="flex items-center gap-3 overflow-x-auto whitespace-nowrap py-2 scroll-smooth">
+                        <!-- Botões de filtro serão injetados aqui pelo JS -->
+                    </div>
+                    <button id="scroll-right" class="absolute -right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-slate-800/50 hover:bg-slate-700/80 transition-opacity opacity-0 cursor-pointer hidden sm:flex items-center justify-center"><i data-lucide="chevron-right"></i></button>
+                </section>
+                
+                <div class="mt-8">
+                    <!-- Seção de Jogos em Destaque -->
+                    <section>
+                        <h2 class="text-3xl font-bold mb-6 section-title" data-translate-key="featured_games_title">Jogos em Destaque</h2>
+                        <div id="featured-games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-5">
+                            <!-- Cards de Destaque serão injetados aqui -->
+                        </div>
+                    </section>
+                    
+                    <!-- Seção de Todos os Jogos -->
+                    <section class="mt-16">
+                        <h2 class="text-3xl font-bold mb-6 section-title" data-translate-key="all_games_title">Todos os Jogos</h2>
+                        <div id="all-games-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+                            <!-- Cards de Todos os Jogos serão injetados aqui -->
+                            <!-- Mensagem de Nenhum Resultado (oculta por padrão) -->
+                            <div id="noResultsMessage" class="hidden text-center col-span-full py-10">
+                                <i data-lucide="frown" class="w-16 h-16 mx-auto text-muted"></i>
+                                <h3 class="mt-4 text-xl font-semibold" data-translate-key="no_results_title">Nenhum jogo encontrado</h3>
+                                <p class="text-muted" data-translate-key="no_results_subtitle">Tente pesquisar com outros termos.</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+
+        <!-- Página 404 (oculta por padrão) -->
+        <div id="page404" class="hidden text-center py-20">
+            <i data-lucide="wrench" class="w-24 h-24 mx-auto text-violet-400 animate-pulse"></i>
+            <h1 class="text-6xl font-extrabold mt-8" data-translate-key="coming_soon_title">Em Breve</h1>
+            <p class="text-xl text-muted mt-4" data-translate-key="coming_soon_subtitle">Estamos a trabalhar nesta secção!</p>
+            <p class="mt-2" data-translate-key="coming_soon_description">Novas funcionalidades e jogos incríveis estão a caminho.</p>
+            <button id="backHomeBtn" class="mt-8 btn-gradient text-white px-8 py-3 rounded-lg font-bold text-lg" data-translate-key="404_button">Voltar para a Base</button>
+        </div>
+
+        <!-- Página de Anúncios (oculta por padrão) -->
+        <div id="announcementsPage" class="hidden py-10">
+            <h1 class="text-4xl font-bold mb-8 text-center" data-translate-key="announcements_title">Anúncios</h1>
+            <div class="glass-effect rounded-2xl p-8 text-center border-l-4 border-violet-500 max-w-4xl mx-auto">
+                <i data-lucide="flask-conical" class="w-12 h-12 mx-auto text-muted"></i>
+                <p class="mt-4 text-muted" data-translate-key="announcement_testing">Este site está em fase de testes. Novas funcionalidades e jogos são adicionados constantemente. Agradecemos a sua visita!</p>
+            </div>
+            <div class="text-center mt-8">
+                <button id="backHomeBtnAnnouncements" class="btn-gradient text-white px-8 py-3 rounded-lg font-bold text-lg" data-translate-key="404_button">Voltar para a Base</button>
+            </div>
+        </div>
+
+        <!-- Rodapé -->
+        <footer class="mt-20 py-10 border-t border-border-color">
+            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+                 <p class="text-muted" data-translate-key="footer_copyright">&copy; 2024 GameShare. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        // ===================================================================================
+        // --- BASE DE DADOS E TRADUÇÕES ---
+        // ===================================================================================
+
+        // Para adicionar um novo jogo, basta copiar um bloco de código (de { até }) e colá-lo no final da lista.
+        // Depois, altere as informações:
+        // - id: um número único para o jogo.
+        // - title: o nome do jogo.
+        // - image: o link da imagem da capa.
+        // - categories: uma lista de categorias (entre aspas e separadas por vírgula).
+        // - featured: 'true' se o jogo deve aparecer nos destaques, 'false' se não.
+        const gamesData = [
+            {
+                id: 1,
+                title: "Minecraft",
+                image: "https://placehold.co/600x400/2E7D32/FFFFFF?text=Minecraft",
+                categories: ["Sandbox", "Sobrevivência"],
+                featured: true,
+            },
+            {
+                id: 2,
+                title: "Terraria",
+                image: "https://placehold.co/600x400/9C27B0/FFFFFF?text=Terraria",
+                categories: ["Sandbox", "Aventura"],
+                featured: false,
+            },
+            // --- FIM DA LISTA DE JOGOS ---
+            // Para adicionar mais jogos, adicione mais blocos aqui.
+        ];
+
+        const translations = {
+            en: {
+                nav_games: "Games", nav_apks: "APKs", nav_announcements: "Announcements", search_placeholder: "Search...", hero_title: "Your Universe of Discoveries", hero_subtitle: "Explore recommendations, find APKs, and dive into new adventures selected by the community.", featured_games_title: "Featured Games", all_games_title: "All Games", genre_action: "Action", genre_adventure: "Adventure", genre_action_rpg: "Action RPG", genre_rpg: "RPG", genre_roguelike: "Roguelike", genre_action_adventure: "Action-Adventure", genre_sandbox: "Sandbox", genre_metroidvania: "Metroidvania", genre_simulation: "Simulation", genre_platform: "Platform", no_results_title: "No games found", no_results_subtitle: "Try searching with other terms.", coming_soon_title: "Coming Soon", coming_soon_subtitle: "We are working on this section!", coming_soon_description: "New features and amazing games are on the way.", "404_button": "Back to Base", footer_copyright: "© 2024 GameShare. All rights reserved.", loading_text: "Translating...", download_button: "Download", category_all: "All", genre_survival: "Survival", genre_puzzle: "Puzzle", genre_music: "Music", genre_strategy: "Strategy", genre_card: "Card Game", announcements_title: "Announcements", no_announcements: "No new announcements at the moment. Stay tuned for the next updates!", announcement_testing: "This site is in a testing phase. New features and games are constantly being added. Thank you for visiting!",
+            },
+            pt: {
+                nav_games: "Games", nav_apks: "APKs", nav_announcements: "Anúncios", search_placeholder: "Pesquisar...", hero_title: "Seu Universo de Descobertas", hero_subtitle: "Explore recomendações, encontre APKs e mergulhe em novas aventuras selecionadas pela comunidade.", featured_games_title: "Jogos em Destaque", all_games_title: "Todos os Jogos", genre_action: "Ação", genre_adventure: "Aventura", genre_action_rpg: "RPG de Ação", genre_rpg: "RPG", genre_roguelike: "Roguelike", genre_action_adventure: "Ação-Aventura", genre_sandbox: "Sandbox", genre_metroidvania: "Metroidvania", genre_simulation: "Simulação", genre_platform: "Plataforma", no_results_title: "Nenhum jogo encontrado", no_results_subtitle: "Tente pesquisar com outros termos.", coming_soon_title: "Em Breve", coming_soon_subtitle: "Estamos a trabalhar nesta secção!", coming_soon_description: "Novas funcionalidades e jogos incríveis estão a caminho.", "404_button": "Voltar para a Base", footer_copyright: "© 2024 GameShare. Todos os direitos reservados.", loading_text: "Traduzindo...", download_button: "Baixar", category_all: "Todos", genre_survival: "Sobrevivência", genre_puzzle: "Puzzle", genre_music: "Música", genre_strategy: "Estratégia", genre_card: "Cartas", announcements_title: "Anúncios", no_announcements: "Nenhum anúncio novo no momento. Fique de olho para as próximas novidades!", announcement_testing: "Este site está em fase de testes. Novas funcionalidades e jogos são adicionados constantemente. Agradecemos a sua visita!",
+            },
+            es: {
+                nav_games: "Juegos", nav_apks: "APKs", nav_announcements: "Anuncios", search_placeholder: "Buscar...", hero_title: "Tu Universo de Descubrimientos", hero_subtitle: "Explora recomendaciones, encuentra APKs y sumérgete en nuevas aventuras seleccionadas por la comunidad.", featured_games_title: "Juegos Destacados", all_games_title: "Todos los Juegos", genre_action: "Acción", genre_adventure: "Aventura", genre_action_rpg: "RPG de Acción", genre_rpg: "RPG", genre_roguelike: "Roguelike", genre_action_adventure: "Acción-Aventura", genre_sandbox: "Sandbox", genre_metroidvania: "Metroidvania", genre_simulation: "Simulación", genre_platform: "Plataforma", no_results_title: "No se encontraron juegos", no_results_subtitle: "Intenta buscar con otros términos.", coming_soon_title: "Próximamente", coming_soon_subtitle: "¡Estamos trabajando en esta sección!", coming_soon_description: "Nuevas características y juegos increíbles están en camino.", "404_button": "Volver a la Base", footer_copyright: "© 2024 GameShare. Todos los derechos reservados.", loading_text: "Traduciendo...", download_button: "Descargar", category_all: "Todos", genre_survival: "Supervivencia", genre_puzzle: "Puzzle", genre_music: "Música", genre_strategy: "Estrategia", genre_card: "Cartas", announcements_title: "Anuncios", no_announcements: "No hay anuncios nuevos por el momento. ¡Esté atento a las próximas actualizaciones!", announcement_testing: "Este sitio está en fase de pruebas. Nuevas características y juegos se añaden constantemente. ¡Gracias por su visita!",
+            },
+            ru: {
+                nav_games: "Игры", nav_apks: "APKs", nav_announcements: "Объявления", search_placeholder: "Поиск...", hero_title: "Ваша Вселенная Открытий", hero_subtitle: "Изучайте рекомендации, находите APK и погружайтесь в новые приключения, выбранные сообществом.", featured_games_title: "Рекомендуемые Игры", all_games_title: "Все Игры", genre_action: "Экшен", genre_adventure: "Приключения", genre_action_rpg: "Экшен-РПГ", genre_rpg: "РПГ", genre_roguelike: "Рогалик", genre_action_adventure: "Экшен-приключение", genre_sandbox: "Песочница", genre_metroidvania: "Метроидвания", genre_simulation: "Симулятор", genre_platform: "Платформер", no_results_title: "Игры не найдены", no_results_subtitle: "Попробуйте поискать по другим терминам.", coming_soon_title: "Скоро", coming_soon_subtitle: "Мы работаем над этим разделом!", coming_soon_description: "Новые функции и потрясающие игры уже в пути.", "404_button": "Вернуться на базу", footer_copyright: "© 2024 GameShare. Все права защищены.", loading_text: "Перевод...", download_button: "Скачать", category_all: "Все", genre_survival: "Выживание", genre_puzzle: "Головоломка", genre_music: "Музыка", genre_strategy: "Стратегия", genre_card: "Карточная игра", announcements_title: "Объявления", no_announcements: "На данный момент новых объявлений нет. Следите за обновлениями!", announcement_testing: "Этот сайт находится в стадии тестирования. Постоянно добавляются новые функции и игры. Спасибо за ваш визит!",
+            }
+        };
+
+        // --- INICIALIZAÇÃO E SELETORES ---
+        const mainContent = document.getElementById('mainContent');
+        const page404 = document.getElementById('page404');
+        const announcementsPage = document.getElementById('announcementsPage');
+        const homeLink = document.getElementById('homeLink');
+        const backHomeBtn = document.getElementById('backHomeBtn');
+        const backHomeBtnAnnouncements = document.getElementById('backHomeBtnAnnouncements');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const langBtn = document.getElementById('langBtn');
+        const langMenu = document.getElementById('langMenu');
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const categoryFilterBar = document.getElementById('category-filter-bar');
+        const featuredGrid = document.getElementById('featured-games-grid');
+        const allGamesGrid = document.getElementById('all-games-grid');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const htmlElement = document.documentElement;
+        
+        // --- FUNÇÕES ---
+        
+        const createGameCardHTML = (game) => {
+            const currentLang = localStorage.getItem('language') || 'pt';
+            const categoriesHTML = game.categories.map(category => {
+                const key = `genre_${category.toLowerCase().replace(/ /g, '_').replace(/-/g, '_')}`;
+                const translatedCategory = translations[currentLang]?.[key] || category;
+                return `<span class="category-tag text-sm font-semibold bg-violet-500/20 dark:bg-violet-500/30 text-violet-700 dark:text-violet-300 px-2.5 py-1 rounded-full cursor-pointer" data-category="${category}">${translatedCategory}</span>`;
+            }).join('');
+
+            return `
+                <div class="glass-card rounded-xl game-card flex flex-col" data-categories="${game.categories.join(',')}" style="display: flex;">
+                    <img src="${game.image}" alt="${game.title}" class="w-full h-48 object-cover">
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex-grow">
+                            <h3 class="font-bold text-lg mb-3">${game.title}</h3>
+                            <div class="flex flex-wrap gap-2">${categoriesHTML}</div>
+                        </div>
+                        <a href="#" class="mt-4 w-full bg-slate-500/20 dark:bg-slate-800/30 hover:bg-slate-500/40 dark:hover:bg-slate-800/60 text-center py-2.5 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-colors">
+                            <i data-lucide="download" class="w-4 h-4"></i>
+                            <span data-translate-key="download_button">${translations[currentLang]?.download_button || 'Baixar'}</span>
+                        </a>
+                    </div>
+                </div>
+            `;
+        };
+
+        const renderGames = () => {
+            let featuredHTML = '';
+            let allGamesHTML = '';
+            
+            gamesData.forEach(game => {
+                const cardHTML = createGameCardHTML(game);
+                if (game.featured) {
+                    featuredHTML += cardHTML;
+                }
+                allGamesHTML += cardHTML;
+            });
+
+            featuredGrid.innerHTML = featuredHTML;
+            allGamesGrid.innerHTML = allGamesHTML + `
+                <div id="noResultsMessage" class="hidden text-center col-span-full py-10">
+                    <i data-lucide="frown" class="w-16 h-16 mx-auto text-muted"></i>
+                    <h3 class="mt-4 text-xl font-semibold" data-translate-key="no_results_title">Nenhum jogo encontrado</h3>
+                    <p class="text-muted" data-translate-key="no_results_subtitle">Tente pesquisar com outros termos.</p>
+                </div>
+            `;
+            lucide.createIcons();
+        };
+
+        const setLanguage = (lang) => {
+            localStorage.setItem('language', lang);
+            document.documentElement.lang = lang;
+            const langTranslations = translations[lang] || translations.pt;
+            document.querySelectorAll('[data-translate-key]').forEach(el => {
+                const key = el.getAttribute('data-translate-key');
+                const textNode = el.querySelector('span') || Array.from(el.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+                if (el.placeholder) el.placeholder = langTranslations[key];
+                else if (textNode) textNode.textContent = langTranslations[key];
+                else el.textContent = langTranslations[key];
+            });
+            generateCategoryFilters(); // Atualiza as categorias traduzidas
+        };
+
+        const showPage = (pageId) => {
+            mainContent.classList.add('hidden');
+            page404.classList.add('hidden');
+            announcementsPage.classList.add('hidden');
+            const pageToShow = document.getElementById(pageId);
+            if(pageToShow) pageToShow.classList.remove('hidden');
+        };
+
+        const goHome = (e) => {
+            if(e) e.preventDefault();
+            showPage('mainContent');
+        };
+
+        const updateFilters = () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeCategory = document.querySelector('.category-filter.active')?.dataset.category;
+            let visibleGames = 0;
+            document.querySelectorAll('#all-games-grid .game-card, #featured-games-grid .game-card').forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const categories = card.dataset.categories.split(',');
+                const searchMatch = title.includes(searchTerm);
+                const categoryMatch = !activeCategory || activeCategory === 'Todos' || categories.includes(activeCategory);
+                const isVisible = searchMatch && categoryMatch;
+                card.style.display = isVisible ? 'flex' : 'none';
+                if(isVisible) visibleGames++;
+            });
+            const isFiltering = searchTerm.length > 0 || (activeCategory && activeCategory !== 'Todos');
+            document.querySelectorAll('.section-title').forEach(title => title.style.display = isFiltering ? 'none' : 'block');
+            document.getElementById('noResultsMessage').style.display = (visibleGames === 0 && isFiltering) ? 'block' : 'none';
+        };
+
+        const generateCategoryFilters = () => {
+            const categories = new Set();
+            gamesData.forEach(game => game.categories.forEach(cat => categories.add(cat)));
+            const currentLang = localStorage.getItem('language') || 'pt';
+            const allText = translations[currentLang]?.category_all || "Todos";
+            let filterButtonsHTML = `<button class="category-filter active px-4 py-2 rounded-lg text-sm font-semibold transition-colors bg-violet-500 text-white" data-category="Todos">${allText}</button>`;
+            categories.forEach(category => {
+                const key = `genre_${category.toLowerCase().replace(/ /g, '_').replace(/-/g, '_')}`;
+                const translatedCategory = translations[currentLang]?.[key] || category;
+                filterButtonsHTML += `<button class="category-filter px-4 py-2 rounded-lg text-sm font-semibold transition-colors bg-slate-500/20 dark:bg-slate-800/30 hover:bg-slate-500/40 dark:hover:bg-slate-800/60" data-category="${category}">${translatedCategory}</button>`;
+            });
+            categoryFilterBar.innerHTML = filterButtonsHTML;
+            document.querySelectorAll('.category-filter, .category-tag').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const category = e.currentTarget.dataset.category;
+                    document.querySelectorAll('.category-filter').forEach(btn => {
+                        const isActive = btn.dataset.category === category;
+                        btn.classList.toggle('active', isActive);
+                        btn.classList.toggle('bg-violet-500', isActive);
+                        btn.classList.toggle('text-white', isActive);
+                        btn.classList.toggle('bg-slate-500/20', !isActive);
+                        btn.classList.toggle('dark:bg-slate-800/30', !isActive);
+                    });
+                    updateFilters();
+                });
+            });
+        };
+
+        const updateIcon = (isDark) => {
+            if (darkModeToggle) {
+                const iconName = isDark ? 'sun' : 'moon';
+                darkModeToggle.innerHTML = `<i data-lucide="${iconName}" class="w-6 h-6 text-yellow-400"></i>`;
+                lucide.createIcons();
+            }
+        };
+
+        const setDarkMode = (isDark) => {
+            htmlElement.classList.toggle('dark', isDark);
+            htmlElement.classList.toggle('light', !isDark);
+            localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
+            updateIcon(isDark);
+        };
+
+        // --- EVENT LISTENERS E INICIALIZAÇÃO ---
+        homeLink.addEventListener('click', goHome);
+        backHomeBtn.addEventListener('click', goHome);
+        backHomeBtnAnnouncements.addEventListener('click', goHome);
+        navLinks.forEach(link => link.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage(e.currentTarget.dataset.page);
+        }));
+        if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        if (searchBtn) searchBtn.addEventListener('click', () => { searchInput.classList.toggle('active'); searchInput.focus(); });
+        if (searchInput) searchInput.addEventListener('input', updateFilters);
+        if (darkModeToggle) darkModeToggle.addEventListener('click', () => setDarkMode(!htmlElement.classList.contains('dark')));
+        langBtn.addEventListener('click', () => langMenu.classList.toggle('hidden'));
+        document.querySelectorAll('.lang-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                const lang = e.currentTarget.getAttribute('data-lang');
+                setLanguage(lang);
+                langMenu.classList.add('hidden');
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderGames();
+            const savedTheme = localStorage.getItem('darkMode');
+            setDarkMode(savedTheme !== 'disabled');
+            const savedLang = localStorage.getItem('language') || 'pt';
+            setLanguage(savedLang);
+            generateCategoryFilters();
+        });
+    </script>
+</body>
+</html>
