@@ -299,7 +299,7 @@
             {
                 id: 1,
                 title: "Minecraft",
-                image: "https://placehold.co/300x300/065f46/ffffff?text=Minecraft",
+                image: "https://placehold.co/400x300/065f46/ffffff?text=Minecraft",
                 categories: ["Sandbox", "Sobrevivência", "Aventura", "Mundo Aberto"],
                 featured: true,
                 hasAddons: true,
@@ -322,7 +322,7 @@
             {
                 id: 2,
                 title: "Terraria",
-                image: "https://placehold.co/300x300/581c87/ffffff?text=Terraria",
+                image: "https://placehold.co/400x300/581c87/ffffff?text=Terraria",
                 categories: ["Sandbox", "Aventura"],
                 featured: true,
                 hasAddons: false,
@@ -388,7 +388,7 @@
             return `
                 <div class="glass-card rounded-2xl game-card flex flex-col overflow-hidden h-full">
                     <div class="relative">
-                        <img src="${game.image}" alt="${game.title}" class="w-full aspect-square object-cover" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0D1117/E2E8F0?text=Image+Not+Found';">
+                        <img src="${game.image}" alt="${game.title}" class="w-full aspect-[4/3] object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x300/0D1117/E2E8F0?text=Image+Not+Found';">
                     </div>
                     <div class="p-3 flex flex-col flex-grow bg-slate-900/80">
                         <div class="flex-grow">
@@ -667,4 +667,4 @@
         });
     </script>
 </body>
-</ht
+</html>
