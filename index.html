@@ -222,7 +222,6 @@
                     <!-- Seção de Jogos em Destaque -->
                     <section>
                         <h2 class="text-3xl font-bold mb-6 section-title" data-translate-key="featured_games_title">Jogos em Destaque</h2>
-                        <!-- MODIFICATION: Adjusted grid for larger cards on PC -->
                         <div id="featured-games-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5">
                             <!-- Cards de Destaque serão injetados aqui -->
                         </div>
@@ -231,7 +230,6 @@
                     <!-- Seção de Todos os Jogos -->
                     <section class="mt-16">
                         <h2 class="text-3xl font-bold mb-6 section-title" data-translate-key="all_games_title">Todos os Jogos</h2>
-                        <!-- MODIFICATION: Adjusted grid for larger cards on PC -->
                         <div id="all-games-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-5">
                             <!-- Cards de Todos os Jogos serão injetados aqui -->
                         </div>
@@ -384,7 +382,7 @@
             }).join('');
 
             const addonsButtonHTML = game.hasAddons 
-                ? `<button class="open-addons-btn p-2.5 rounded-lg bg-slate-800/60 hover:bg-slate-700/80 transition-colors flex-shrink-0" data-game-id="${game.id}"><i data-lucide="box" class="w-5 h-5 text-slate-300"></i></button>` 
+                ? `<button class="open-addons-btn p-2 rounded-lg bg-slate-800/60 hover:bg-slate-700/80 transition-colors flex-shrink-0" data-game-id="${game.id}"><i data-lucide="box" class="w-5 h-5 text-slate-300"></i></button>` 
                 : '';
 
             return `
@@ -392,17 +390,17 @@
                     <div class="relative">
                         <img src="${game.image}" alt="${game.title}" class="w-full aspect-square object-cover" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0D1117/E2E8F0?text=Image+Not+Found';">
                     </div>
-                    <div class="p-4 flex flex-col flex-grow bg-slate-900/80">
+                    <div class="p-3 flex flex-col flex-grow bg-slate-900/80">
                         <div class="flex-grow">
                             <h3 class="font-bold text-lg mb-2 text-primary truncate">${game.title}</h3>
-                            <div class="category-container relative h-7 flex items-center overflow-hidden mb-3">
+                            <div class="category-container relative h-7 flex items-center overflow-hidden mb-2">
                                 <div class="category-list absolute flex items-center gap-2 whitespace-nowrap">
                                     ${categoriesHTML}
                                 </div>
                             </div>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <a href="#" class="w-full flex-grow bg-slate-800/60 hover:bg-slate-700/80 text-primary text-center py-2.5 px-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-colors text-sm">
+                        <div class="flex items-center gap-2">
+                            <a href="#" class="w-full flex-grow bg-slate-800/60 hover:bg-slate-700/80 text-primary text-center py-2 px-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-colors text-sm">
                                 <i data-lucide="download" class="w-4 h-4"></i>
                                 <span data-translate-key="download_button">${translations[currentLang]?.download_button || 'Baixar'}</span>
                             </a>
@@ -669,4 +667,4 @@
         });
     </script>
 </body>
-</html>
+</ht
