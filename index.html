@@ -8,28 +8,45 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
+        /* ============================================= */
+        /* --- Variáveis de Tema (Raiz) --- */
+        /* ============================================= */
         :root {
             --background-color: #0D1117;
             --card-background: rgba(15, 23, 42, 0.6);
-            --card-content-bg: #0f172a; /* Cor sólida do conteúdo do card (slate-900) */
+            --card-content-bg: rgba(15, 23, 42, 0.8); /* slate-900 com opacidade */
             --glass-background: rgba(30, 41, 59, 0.5);
             --text-primary: #E2E8F0;
             --text-muted: #94A3B8;
             --border-color: rgba(255, 255, 255, 0.1);
             --accent-violet: #8b5cf6;
             --accent-blue: #3b82f6;
+            --button-hover-bg: rgba(51, 65, 85, 0.8);
+            --button-bg: rgba(51, 65, 85, 0.6);
+            --category-tag-bg: rgba(139, 92, 246, 0.2);
+            --category-tag-text: #c4b5fd;
+            --header-hover-bg: #1e293b; /* slate-800 */
         }
-        /* Tema Claro "Cinza Gamer" Aprimorado */
+
+        /* Tema Claro */
         html.light {
             --background-color: #e2e8f0; /* slate-200 */
             --card-background: rgba(203, 213, 225, 0.6); /* slate-300 */
-            --card-content-bg: #ffffff;
+            --card-content-bg: rgba(255, 255, 255, 0.8); /* white com opacidade */
             --glass-background: rgba(226, 232, 240, 0.7); /* slate-200 */
             --text-primary: #1e293b; /* slate-800 */
             --text-muted: #475569; /* slate-600 */
             --border-color: rgba(148, 163, 184, 0.4); /* slate-400 */
+            --button-hover-bg: #cbd5e1; /* slate-300 */
+            --button-bg: #e2e8f0; /* slate-200 */
+            --category-tag-bg: #ede9fe; /* violet-100 */
+            --category-tag-text: #6d28d9; /* violet-700 */
+            --header-hover-bg: #cbd5e1; /* slate-300 */
         }
 
+        /* ============================================= */
+        /* --- Estilos Base --- */
+        /* ============================================= */
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--background-color);
@@ -48,7 +65,18 @@
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
         }
-        
+
+        /* ============================================= */
+        /* --- Estilos de Componentes Reutilizáveis --- */
+        /* ============================================= */
+        .header-button {
+            background-color: transparent;
+            transition: background-color 0.2s;
+        }
+        .header-button:hover {
+            background-color: var(--header-hover-bg);
+        }
+
         .glass-card {
             background: var(--card-background);
             backdrop-filter: blur(10px);
@@ -71,6 +99,37 @@
              background: rgba(203, 213, 225, 0.9);
              box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 12px rgba(59, 130, 246, 0.4);
         }
+        .card-content {
+            background-color: var(--card-content-bg);
+        }
+        .card-button {
+            background-color: var(--button-bg);
+            color: var(--text-primary);
+            transition: background-color 0.2s;
+        }
+        .card-button:hover {
+            background-color: var(--button-hover-bg);
+        }
+        .category-tag {
+            background-color: var(--category-tag-bg);
+            color: var(--category-tag-text);
+        }
+
+        .category-filter {
+            background-color: var(--button-bg);
+            color: var(--text-muted);
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .category-filter:hover {
+             background-color: var(--button-hover-bg);
+        }
+        .category-filter.active {
+            background-color: var(--accent-violet);
+            color: white;
+        }
+        html.light .category-filter.active {
+            color: white;
+        }
 
         .btn-gradient {
             background-image: linear-gradient(to right, var(--accent-blue), var(--accent-violet));
@@ -80,9 +139,32 @@
             box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
         }
         
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .loader { animation: spin 1s linear infinite; }
+        /* ============================================= */
+        /* --- Modal de Add-ons --- */
+        /* ============================================= */
+        #addonsModal .modal-backdrop {
+            background-color: rgba(0,0,0,0.5);
+            transition: background-color 0.3s;
+        }
+        html.light #addonsModal .modal-backdrop {
+            background-color: rgba(30, 41, 59, 0.3);
+        }
+        .addon-item {
+            background-color: var(--glass-background);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+        .addon-download-btn {
+            background-color: var(--button-bg);
+            transition: background-color 0.2s;
+        }
+        .addon-download-btn:hover {
+            background-color: var(--button-hover-bg);
+        }
 
+        /* ============================================= */
+        /* --- Outros Estilos e Animações --- */
+        /* ============================================= */
         .hero-background {
             background: linear-gradient(-45deg, #0D1117, #1E293B, #3730A3, #0D1117);
             background-size: 400% 400%;
@@ -93,7 +175,6 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
         html.light .hero-background {
             background: linear-gradient(-45deg, #e2e8f0, #cbd5e1, #94a3b8);
         }
@@ -121,20 +202,9 @@
              #searchInput.active { width: 120px; }
         }
         
-        .category-filter.active {
-            background-color: var(--accent-violet);
-            color: white;
-        }
-        /* Hide scrollbar for category filter */
-        #category-filter-bar::-webkit-scrollbar {
-            display: none;
-        }
-        #category-filter-bar {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
+        #category-filter-bar::-webkit-scrollbar { display: none; }
+        #category-filter-bar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Gradient overlay for category animation */
         .category-container.is-overflowing::after {
             content: '';
             position: absolute;
@@ -144,7 +214,7 @@
             width: 40px;
             background: linear-gradient(to left, var(--card-content-bg), transparent);
             pointer-events: none;
-            transition: opacity 0.3s;
+            transition: opacity 0.3s, background 0.3s;
         }
     </style>
 </head>
@@ -169,26 +239,26 @@
             <div class="flex items-center space-x-2 sm:space-x-4">
                 <div class="hidden sm:flex items-center">
                     <input id="searchInput" type="text" placeholder="Pesquisar..." data-translate-key="search_placeholder" class="bg-transparent rounded-lg py-2 focus:outline-none focus:ring-2 focus:ring-violet-500">
-                    <button id="searchBtn" class="p-2 rounded-full hover:bg-slate-700 dark:hover:bg-slate-300 transition-colors">
+                    <button id="searchBtn" class="header-button p-2 rounded-full">
                         <i data-lucide="search" class="w-5 h-5 text-muted"></i>
                     </button>
                 </div>
                 <!-- Language Selector -->
                 <div class="relative">
-                    <button id="langBtn" class="p-2 rounded-full hover:bg-slate-700 dark:hover:bg-slate-300 transition-colors">
+                    <button id="langBtn" class="header-button p-2 rounded-full">
                         <i data-lucide="globe" class="w-5 h-5 text-muted"></i>
                     </button>
                     <div id="langMenu" class="hidden absolute right-0 mt-2 w-48 glass-effect rounded-lg shadow-lg py-1 z-50">
-                        <a href="#" class="lang-option flex justify-between items-center px-4 py-2 text-sm text-inherit hover:bg-slate-700 dark:hover:bg-slate-600" data-lang="pt">Português (BR)</a>
-                        <a href="#" class="lang-option flex justify-between items-center px-4 py-2 text-sm text-inherit hover:bg-slate-700 dark:hover:bg-slate-600" data-lang="en">English (US)</a>
-                        <a href="#" class="lang-option flex justify-between items-center px-4 py-2 text-sm text-inherit hover:bg-slate-700 dark:hover:bg-slate-600" data-lang="es">Español</a>
-                        <a href="#" class="lang-option flex justify-between items-center px-4 py-2 text-sm text-inherit hover:bg-slate-700 dark:hover:bg-slate-600" data-lang="ru">Русский</a>
+                        <a href="#" class="lang-option block px-4 py-2 text-sm text-inherit hover:bg-slate-700" data-lang="pt">Português (BR)</a>
+                        <a href="#" class="lang-option block px-4 py-2 text-sm text-inherit hover:bg-slate-700" data-lang="en">English (US)</a>
+                        <a href="#" class="lang-option block px-4 py-2 text-sm text-inherit hover:bg-slate-700" data-lang="es">Español</a>
+                        <a href="#" class="lang-option block px-4 py-2 text-sm text-inherit hover:bg-slate-700" data-lang="ru">Русский</a>
                     </div>
                 </div>
-                <button id="darkModeToggle" class="p-2 rounded-full hover:bg-slate-700 dark:hover:bg-slate-300 transition-colors">
+                <button id="darkModeToggle" class="header-button p-2 rounded-full">
                      <!-- O ícone será inserido pelo JS -->
                 </button>
-                <button id="mobileMenuBtn" class="md:hidden p-2 rounded-full hover:bg-slate-700 dark:hover:bg-slate-300">
+                <button id="mobileMenuBtn" class="md:hidden header-button p-2 rounded-full">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
             </div>
@@ -211,11 +281,9 @@
                 
                 <!-- Barra de Filtro de Categorias -->
                 <section class="mt-12 relative">
-                    <button id="scroll-left" class="absolute -left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-slate-800/50 hover:bg-slate-700/80 transition-opacity opacity-0 cursor-pointer hidden sm:flex items-center justify-center"><i data-lucide="chevron-left"></i></button>
                     <div id="category-filter-bar" class="flex items-center gap-3 overflow-x-auto whitespace-nowrap py-2 scroll-smooth">
                         <!-- Botões de filtro serão injetados aqui pelo JS -->
                     </div>
-                    <button id="scroll-right" class="absolute -right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-slate-800/50 hover:bg-slate-700/80 transition-opacity opacity-0 cursor-pointer hidden sm:flex items-center justify-center"><i data-lucide="chevron-right"></i></button>
                 </section>
                 
                 <div class="mt-8">
@@ -265,16 +333,16 @@
             <div class="text-center mt-8">
                 <button id="backHomeBtnAnnouncements" class="btn-gradient text-white px-8 py-3 rounded-lg font-bold text-lg" data-translate-key="404_button">Voltar para a Base</button>
             </div>
-        </footer>
+        </div>
     </div>
     
     <!-- Modal de Add-ons -->
     <div id="addonsModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
-        <div class="modal-backdrop fixed inset-0 bg-black/50 backdrop-blur-sm"></div>
+        <div class="modal-backdrop fixed inset-0"></div>
         <div class="glass-card rounded-2xl w-full max-w-4xl max-h-[90vh] mx-auto z-10 flex flex-col">
             <div class="p-4 border-b border-border-color flex justify-between items-center flex-shrink-0">
                 <h2 id="addonsModalTitle" class="text-2xl font-bold">Add-ons</h2>
-                <button id="closeAddonsModalBtn" class="p-2 rounded-full hover:bg-slate-700 dark:hover:bg-slate-300 transition-colors">
+                <button id="closeAddonsModalBtn" class="header-button p-2 rounded-full">
                     <i data-lucide="x" class="w-6 h-6"></i>
                 </button>
             </div>
@@ -325,16 +393,16 @@
 
         const translations = {
             en: {
-                nav_games: "Games", nav_apks: "APKs", nav_announcements: "Announcements", search_placeholder: "Search...", hero_title: "Your Universe of Discoveries", hero_subtitle: "Explore recommendations, find APKs, and dive into new adventures selected by the community.", featured_games_title: "Featured Games", all_games_title: "All Games", genre_action: "Action", genre_adventure: "Adventure", genre_action_rpg: "Action RPG", genre_rpg: "RPG", genre_roguelike: "Roguelike", genre_action_adventure: "Action-Adventure", genre_sandbox: "Sandbox", genre_metroidvania: "Metroidvania", genre_simulation: "Simulation", genre_platform: "Platform", no_results_title: "No games found", no_results_subtitle: "Try searching with other terms.", coming_soon_title: "Coming Soon", coming_soon_subtitle: "We are working on this section!", coming_soon_description: "New features and amazing games are on the way.", "404_button": "Back to Base", footer_copyright: "© 2024 GameShare. All rights reserved.", download_button: "Download", category_all: "All", genre_survival: "Survival", "genre_open-world": "Open World", genre_puzzle: "Puzzle", genre_music: "Music", genre_strategy: "Strategy", genre_card: "Card Game", announcements_title: "Announcements", no_announcements: "No new announcements at the moment. Stay tuned for the next updates!", announcement_testing: "This site is in a testing phase. New features and games are constantly being added. Thank you for visiting!", addon_modal_title: "Add-ons for", addon_category_textures: "Textures", addon_category_shaders: "Shaders", view_all_button: "View All",
+                nav_games: "Games", nav_apks: "APKs", nav_announcements: "Announcements", search_placeholder: "Search...", hero_title: "Your Universe of Discoveries", hero_subtitle: "Explore recommendations, find APKs, and dive into new adventures selected by the community.", featured_games_title: "Featured Games", all_games_title: "All Games", genre_action: "Action", genre_adventure: "Adventure", genre_action_rpg: "Action RPG", genre_rpg: "RPG", genre_roguelike: "Roguelike", genre_action_adventure: "Action-Adventure", genre_sandbox: "Sandbox", genre_metroidvania: "Metroidvania", genre_simulation: "Simulation", genre_platform: "Platform", no_results_title: "No games found", no_results_subtitle: "Try searching with other terms.", coming_soon_title: "Coming Soon", coming_soon_subtitle: "We are working on this section!", coming_soon_description: "New features and amazing games are on the way.", "404_button": "Back to Base", footer_copyright: "© 2024 GameShare. All rights reserved.", download_button: "Download", category_all: "All", "genre_sobrevivência": "Survival", "genre_mundo_aberto": "Open World", genre_puzzle: "Puzzle", genre_music: "Music", genre_strategy: "Strategy", genre_card: "Card Game", announcements_title: "Announcements", no_announcements: "No new announcements at the moment. Stay tuned for the next updates!", announcement_testing: "This site is in a testing phase. New features and games are constantly being added. Thank you for visiting!", addon_modal_title: "Add-ons for", addon_category_texturas: "Textures", addon_category_shaders: "Shaders", view_all_button: "View All",
             },
             pt: {
-                nav_games: "Games", nav_apks: "APKs", nav_announcements: "Anúncios", search_placeholder: "Pesquisar...", hero_title: "Seu Universo de Descobertas", hero_subtitle: "Explore recomendações, encontre APKs e mergulhe em novas aventuras selecionadas pela comunidade.", featured_games_title: "Jogos em Destaque", all_games_title: "Todos os Jogos", genre_action: "Ação", genre_adventure: "Aventura", genre_action_rpg: "RPG de Ação", genre_rpg: "RPG", genre_roguelike: "Roguelike", genre_action_adventure: "Ação-Aventura", genre_sandbox: "Sandbox", genre_metroidvania: "Metroidvania", genre_simulation: "Simulação", genre_platform: "Plataforma", no_results_title: "Nenhum jogo encontrado", no_results_subtitle: "Tente pesquisar com outros termos.", coming_soon_title: "Em Breve", coming_soon_subtitle: "Estamos a trabalhar nesta secção!", coming_soon_description: "Novas funcionalidades e jogos incríveis estão a caminho.", "404_button": "Voltar para a Base", footer_copyright: "© 2024 GameShare. Todos os direitos reservados.", download_button: "Baixar", category_all: "Todos", genre_survival: "Sobrevivência", "genre_open-world": "Mundo Aberto", genre_puzzle: "Puzzle", genre_music: "Música", genre_strategy: "Estratégia", genre_card: "Cartas", announcements_title: "Anúncios", no_announcements: "Nenhum anúncio novo no momento. Fique de olho para as próximas novidades!", announcement_testing: "Este site está em fase de testes. Novas funcionalidades e jogos são adicionados constantemente. Agradecemos a sua visita!", addon_modal_title: "Add-ons para", addon_category_textures: "Texturas", addon_category_shaders: "Shaders", view_all_button: "Ver Todos",
+                nav_games: "Games", nav_apks: "APKs", nav_announcements: "Anúncios", search_placeholder: "Pesquisar...", hero_title: "Seu Universo de Descobertas", hero_subtitle: "Explore recomendações, encontre APKs e mergulhe em novas aventuras selecionadas pela comunidade.", featured_games_title: "Jogos em Destaque", all_games_title: "Todos os Jogos", genre_action: "Ação", genre_adventure: "Aventura", genre_action_rpg: "RPG de Ação", genre_rpg: "RPG", genre_roguelike: "Roguelike", genre_action_adventure: "Ação-Aventura", genre_sandbox: "Sandbox", genre_metroidvania: "Metroidvania", genre_simulation: "Simulação", genre_platform: "Plataforma", no_results_title: "Nenhum jogo encontrado", no_results_subtitle: "Tente pesquisar com outros termos.", coming_soon_title: "Em Breve", coming_soon_subtitle: "Estamos a trabalhar nesta secção!", coming_soon_description: "Novas funcionalidades e jogos incríveis estão a caminho.", "404_button": "Voltar para a Base", footer_copyright: "© 2024 GameShare. Todos os direitos reservados.", download_button: "Baixar", category_all: "Todos", "genre_sobrevivência": "Sobrevivência", "genre_mundo_aberto": "Mundo Aberto", genre_puzzle: "Puzzle", genre_music: "Música", genre_strategy: "Estratégia", genre_card: "Cartas", announcements_title: "Anúncios", no_announcements: "Nenhum anúncio novo no momento. Fique de olho para as próximas novidades!", announcement_testing: "Este site está em fase de testes. Novas funcionalidades e jogos são adicionados constantemente. Agradecemos a sua visita!", addon_modal_title: "Add-ons para", addon_category_texturas: "Texturas", addon_category_shaders: "Shaders", view_all_button: "Ver Todos",
             },
             es: {
-                nav_games: "Juegos", nav_apks: "APKs", nav_announcements: "Anuncios", search_placeholder: "Buscar...", hero_title: "Tu Universo de Descubrimientos", hero_subtitle: "Explora recomendaciones, encuentra APKs y sumérgete en nuevas aventuras seleccionadas por la comunidad.", featured_games_title: "Juegos Destacados", all_games_title: "Todos los Juegos", genre_action: "Acción", genre_adventure: "Aventura", genre_action_rpg: "RPG de Acción", genre_rpg: "RPG", genre_roguelike: "Roguelike", genre_action_adventure: "Acción-Aventura", genre_sandbox: "Sandbox", genre_metroidvania: "Metroidvania", genre_simulation: "Simulación", genre_platform: "Plataforma", no_results_title: "No se encontraron juegos", no_results_subtitle: "Intenta buscar con otros términos.", coming_soon_title: "Próximamente", coming_soon_subtitle: "¡Estamos trabajando en esta sección!", coming_soon_description: "Nuevas características y juegos increíbles están en camino.", "404_button": "Volver a la Base", footer_copyright: "© 2024 GameShare. Todos os derechos reservados.", download_button: "Descargar", category_all: "Todos", genre_survival: "Supervivencia", "genre_open-world": "Mundo Abierto", genre_puzzle: "Puzzle", genre_music: "Música", genre_strategy: "Estrategia", genre_card: "Cartas", announcements_title: "Anuncios", no_announcements: "No hay anuncios nuevos por el momento. ¡Esté atento a las próximas actualizaciones!", announcement_testing: "Este sitio está en fase de pruebas. Nuevas características y juegos se añaden constantemente. ¡Gracias por su visita!", addon_modal_title: "Add-ons para", addon_category_textures: "Texturas", addon_category_shaders: "Shaders", view_all_button: "Ver Todos",
+                nav_games: "Juegos", nav_apks: "APKs", nav_announcements: "Anuncios", search_placeholder: "Buscar...", hero_title: "Tu Universo de Descubrimientos", hero_subtitle: "Explora recomendaciones, encuentra APKs y sumérgete en nuevas aventuras seleccionadas por la comunidad.", featured_games_title: "Juegos Destacados", all_games_title: "Todos los Juegos", genre_action: "Acción", genre_adventure: "Aventura", genre_action_rpg: "RPG de Acción", genre_rpg: "RPG", genre_roguelike: "Roguelike", genre_action_adventure: "Acción-Aventura", genre_sandbox: "Sandbox", genre_metroidvania: "Metroidvania", genre_simulation: "Simulación", genre_platform: "Plataforma", no_results_title: "No se encontraron juegos", no_results_subtitle: "Intenta buscar con otros términos.", coming_soon_title: "Próximamente", coming_soon_subtitle: "¡Estamos trabajando en esta sección!", coming_soon_description: "Nuevas características y juegos increíbles están en camino.", "404_button": "Volver a la Base", footer_copyright: "© 2024 GameShare. Todos os derechos reservados.", download_button: "Descargar", category_all: "Todos", "genre_sobrevivência": "Supervivencia", "genre_mundo_aberto": "Mundo Abierto", genre_puzzle: "Puzzle", genre_music: "Música", genre_strategy: "Estrategia", genre_card: "Cartas", announcements_title: "Anuncios", no_announcements: "No hay anuncios nuevos por el momento. ¡Esté atento a las próximas actualizaciones!", announcement_testing: "Este sitio está en fase de pruebas. Nuevas características y juegos se añaden constantemente. ¡Gracias por su visita!", addon_modal_title: "Add-ons para", addon_category_texturas: "Texturas", addon_category_shaders: "Shaders", view_all_button: "Ver Todos",
             },
             ru: {
-                nav_games: "Игры", nav_apks: "APKs", nav_announcements: "Объявления", search_placeholder: "Поиск...", hero_title: "Ваша Вселенная Открытий", hero_subtitle: "Изучайте рекомендации, находите APK и погружайтесь в новые приключения, выбранные сообществом.", featured_games_title: "Рекомендуемые Игры", all_games_title: "Все Игры", genre_action: "Экшен", genre_adventure: "Приключения", genre_action_rpg: "Экшен-РПГ", genre_rpg: "РПГ", genre_roguelike: "Рогалик", genre_action_adventure: "Экшен-приключение", genre_sandbox: "Песочница", genre_metroidvania: "Метроидвания", genre_simulation: "Симулятор", genre_platform: "Платформер", no_results_title: "Игры не найдены", no_results_subtitle: "Попробуйте поискать по другим терминам.", coming_soon_title: "Скоро", coming_soon_subtitle: "Мы работаем над этим разделом!", coming_soon_description: "Новые функции и потрясающие игры уже в пути.", "404_button": "Вернуться на базу", footer_copyright: "© 2024 GameShare. Все права защищены.", download_button: "Скачать", category_all: "Все", genre_survival: "Выживание", "genre_open-world": "Открытый мир", genre_puzzle: "Головоломка", genre_music: "Музыка", genre_strategy: "Стратегия", genre_card: "Карточная игра", announcements_title: "Объявления", no_announcements: "На данный момент новых объявлений нет. Следите за обновлениями!", announcement_testing: "Этот сайт находится в стадии тестирования. Постоянно добавляются новые функции и игры. Спасибо за ваш визит!", addon_modal_title: "Аддоны для", addon_category_textures: "Текстуры", addon_category_shaders: "Шейдеры", view_all_button: "Показать все",
+                nav_games: "Игры", nav_apks: "APKs", nav_announcements: "Объявления", search_placeholder: "Поиск...", hero_title: "Ваша Вселенная Открытий", hero_subtitle: "Изучайте рекомендации, находите APK и погружайтесь в новые приключения, выбранные сообществом.", featured_games_title: "Рекомендуемые Игры", all_games_title: "Все Игры", genre_action: "Экшен", genre_adventure: "Приключения", genre_action_rpg: "Экшен-РПГ", genre_rpg: "РПГ", genre_roguelike: "Рогалик", genre_action_adventure: "Экшен-приключение", genre_sandbox: "Песочница", genre_metroidvania: "Метроидвания", genre_simulation: "Симулятор", genre_platform: "Платформер", no_results_title: "Игры не найдены", no_results_subtitle: "Попробуйте поискать по другим терминам.", coming_soon_title: "Скоро", coming_soon_subtitle: "Мы работаем над этим разделом!", coming_soon_description: "Новые функции и потрясающие игры уже в пути.", "404_button": "Вернуться на базу", footer_copyright: "© 2024 GameShare. Все права защищены.", download_button: "Скачать", category_all: "Все", "genre_sobrevivência": "Выживание", "genre_mundo_aberto": "Открытый мир", genre_puzzle: "Головоломка", genre_music: "Музыка", genre_strategy: "Стратегия", genre_card: "Карточная игра", announcements_title: "Объявления", no_announcements: "На данный момент новых объявлений нет. Следите за обновлениями!", announcement_testing: "Этот сайт находится в стадии тестирования. Постоянно добавляются новые функции и игры. Спасибо за ваш визит!", addon_modal_title: "Аддоны для", addon_category_texturas: "Текстуры", addon_category_shaders: "Шейдеры", view_all_button: "Показать все",
             }
         };
 
@@ -369,13 +437,13 @@
         const createGameCardHTML = (game) => {
             const currentLang = localStorage.getItem('language') || 'pt';
             const categoriesHTML = game.categories.map(category => {
-                const key = `genre_${category.toLowerCase().replace(/ /g, '-').replace(/-/g, '_')}`;
+                const key = `genre_${category.toLowerCase().replace(/ /g, '_')}`;
                 const translatedCategory = translations[currentLang]?.[key] || category;
-                return `<span class="category-tag text-xs font-semibold dark:bg-violet-900/50 dark:text-violet-300 bg-violet-100 text-violet-700 px-2.5 py-1 rounded-full cursor-pointer" data-category="${category}">${translatedCategory}</span>`;
+                return `<span class="category-tag text-xs font-semibold px-2.5 py-1 rounded-full cursor-pointer" data-category="${category}">${translatedCategory}</span>`;
             }).join('');
 
             const addonsButtonHTML = game.hasAddons 
-                ? `<button class="open-addons-btn p-2 rounded-lg dark:bg-slate-800/60 dark:hover:bg-slate-700/80 bg-slate-200 hover:bg-slate-300 transition-colors flex-shrink-0" data-game-id="${game.id}"><i data-lucide="box" class="w-5 h-5 text-muted"></i></button>` 
+                ? `<button class="open-addons-btn card-button p-2 rounded-lg flex-shrink-0" data-game-id="${game.id}"><i data-lucide="box" class="w-5 h-5 text-muted"></i></button>` 
                 : '';
 
             return `
@@ -383,7 +451,7 @@
                     <div class="relative">
                         <img src="${game.image}" alt="${game.title}" class="w-full aspect-[4/3] object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x300/0D1117/E2E8F0?text=Image+Not+Found';">
                     </div>
-                    <div class="p-3 flex flex-col flex-grow dark:bg-slate-900/80 bg-white/80">
+                    <div class="p-3 flex flex-col flex-grow card-content">
                         <div class="flex-grow">
                             <h3 class="font-bold text-lg mb-2 text-primary truncate">${game.title}</h3>
                             <div class="category-container relative h-7 flex items-center overflow-hidden mb-2">
@@ -393,7 +461,7 @@
                             </div>
                         </div>
                         <div class="flex items-center gap-2">
-                            <a href="#" class="w-full flex-grow dark:bg-slate-800/60 dark:hover:bg-slate-700/80 bg-slate-200 hover:bg-slate-300 text-primary text-center py-2 px-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-colors text-sm">
+                            <a href="#" class="w-full flex-grow card-button text-center py-2 px-3 rounded-lg font-semibold flex items-center justify-center space-x-2 text-sm">
                                 <i data-lucide="download" class="w-4 h-4"></i>
                                 <span data-translate-key="download_button">${translations[currentLang]?.download_button || 'Baixar'}</span>
                             </a>
@@ -449,7 +517,6 @@
                     }
                 };
                 
-                // Use a slight delay to ensure layout is calculated
                 setTimeout(checkAndAnimate, 50);
                 container.resizeObserver = new ResizeObserver(checkAndAnimate);
                 container.resizeObserver.observe(container);
@@ -463,11 +530,10 @@
             gamesData.forEach((game, index) => {
                 const cardHTML = createGameCardHTML(game);
                 if (game.featured) {
-                    featuredHTML += `<div class="game-wrapper">${cardHTML}</div>`;
+                    featuredHTML += `<div class="game-wrapper" data-title="${game.title}" data-categories="${game.categories.join(',')}">${cardHTML}</div>`;
                 }
                 const isVisibleInitially = index < 14; 
-                const cardWrapper = `<div class="game-wrapper ${isVisibleInitially ? '' : 'hidden'}">${cardHTML}</div>`;
-                allGamesHTML += cardWrapper;
+                allGamesHTML += `<div class="game-wrapper ${isVisibleInitially ? '' : 'hidden'}" data-title="${game.title}" data-categories="${game.categories.join(',')}">${cardHTML}</div>`;
             });
 
             featuredGrid.innerHTML = featuredHTML;
@@ -489,11 +555,16 @@
             document.querySelectorAll('[data-translate-key]').forEach(el => {
                 const key = el.getAttribute('data-translate-key');
                 const textNode = el.querySelector('span') || Array.from(el.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
-                if (el.placeholder) el.placeholder = langTranslations[key];
-                else if (textNode) textNode.textContent = langTranslations[key];
-                else el.textContent = langTranslations[key];
+                if (el.placeholder) {
+                    el.placeholder = langTranslations[key] || el.placeholder;
+                } else if (textNode) {
+                    textNode.textContent = langTranslations[key] || textNode.textContent;
+                } else {
+                    el.textContent = langTranslations[key] || el.textContent;
+                }
             });
             generateCategoryFilters();
+            renderGames(); // Re-render games to update category names
         };
 
         const showPage = (pageId) => {
@@ -512,28 +583,33 @@
         const updateFilters = () => {
             const searchTerm = searchInput.value.toLowerCase();
             const activeCategory = document.querySelector('.category-filter.active')?.dataset.category;
-            let visibleGames = 0;
-            document.querySelectorAll('.game-wrapper').forEach(wrapper => {
-                const card = wrapper.querySelector('.game-card');
-                const title = card.querySelector('h3').textContent.toLowerCase();
-                const categories = card.dataset.categories.split(',');
-                const gameData = gamesData.find(g => g.title === card.querySelector('h3').textContent);
-                let addonsMatch = false;
-                if(gameData && gameData.hasAddons){
-                    addonsMatch = gameData.addons.some(cat => cat.files.some(file => file.name.toLowerCase().includes(searchTerm)));
-                }
-
-                const searchMatch = title.includes(searchTerm) || addonsMatch;
+            
+            let featuredVisibleCount = 0;
+            document.querySelectorAll('#featured-games-grid .game-wrapper').forEach(wrapper => {
+                const title = wrapper.dataset.title.toLowerCase();
+                const categories = wrapper.dataset.categories.split(',');
+                const searchMatch = title.includes(searchTerm);
                 const categoryMatch = !activeCategory || activeCategory === 'Todos' || categories.includes(activeCategory);
                 const isVisible = searchMatch && categoryMatch;
                 wrapper.style.display = isVisible ? 'block' : 'none';
-                if(isVisible) visibleGames++;
+                if (isVisible) featuredVisibleCount++;
             });
+
+            let allVisibleCount = 0;
+             document.querySelectorAll('#all-games-grid .game-wrapper').forEach(wrapper => {
+                const title = wrapper.dataset.title.toLowerCase();
+                const categories = wrapper.dataset.categories.split(',');
+                const searchMatch = title.includes(searchTerm);
+                const categoryMatch = !activeCategory || activeCategory === 'Todos' || categories.includes(activeCategory);
+                const isVisible = searchMatch && categoryMatch;
+                wrapper.style.display = isVisible ? 'block' : 'none';
+                if (isVisible) allVisibleCount++;
+            });
+
             const isFiltering = searchTerm.length > 0 || (activeCategory && activeCategory !== 'Todos');
             document.querySelectorAll('.section-title').forEach(title => title.style.display = isFiltering ? 'none' : 'block');
-            document.getElementById('noResultsMessage').style.display = (visibleGames === 0 && isFiltering) ? 'block' : 'none';
+            document.getElementById('noResultsMessage').style.display = (featuredVisibleCount === 0 && allVisibleCount === 0 && isFiltering) ? 'block' : 'none';
             viewAllContainer.style.display = isFiltering ? 'none' : (gamesData.length > 14 ? 'block' : 'none');
-            initCategoryAnimation();
         };
 
         const generateCategoryFilters = () => {
@@ -541,23 +617,20 @@
             gamesData.forEach(game => game.categories.forEach(cat => categories.add(cat)));
             const currentLang = localStorage.getItem('language') || 'pt';
             const allText = translations[currentLang]?.category_all || "Todos";
-            let filterButtonsHTML = `<button class="category-filter active px-4 py-2 rounded-lg text-sm font-semibold transition-colors bg-violet-500 text-white" data-category="Todos">${allText}</button>`;
+            let filterButtonsHTML = `<button class="category-filter active px-4 py-2 rounded-lg text-sm font-semibold" data-category="Todos">${allText}</button>`;
+            
             categories.forEach(category => {
-                const key = `genre_${category.toLowerCase().replace(/ /g, '-').replace(/-/g, '_')}`;
+                const key = `genre_${category.toLowerCase().replace(/ /g, '_')}`;
                 const translatedCategory = translations[currentLang]?.[key] || category;
-                filterButtonsHTML += `<button class="category-filter px-4 py-2 rounded-lg text-sm font-semibold transition-colors bg-slate-500/20 dark:bg-slate-800/30 hover:bg-slate-500/40 dark:hover:bg-slate-800/60" data-category="${category}">${translatedCategory}</button>`;
+                filterButtonsHTML += `<button class="category-filter px-4 py-2 rounded-lg text-sm font-semibold" data-category="${category}">${translatedCategory}</button>`;
             });
             categoryFilterBar.innerHTML = filterButtonsHTML;
+            
             document.querySelectorAll('.category-filter, .category-tag').forEach(button => {
                 button.addEventListener('click', (e) => {
                     const category = e.currentTarget.dataset.category;
                     document.querySelectorAll('.category-filter').forEach(btn => {
-                        const isActive = btn.dataset.category === category;
-                        btn.classList.toggle('active', isActive);
-                        btn.classList.toggle('bg-violet-500', isActive);
-                        btn.classList.toggle('text-white', isActive);
-                        btn.classList.toggle('bg-slate-500/20', !isActive);
-                        btn.classList.toggle('dark:bg-slate-800/30', !isActive);
+                        btn.classList.toggle('active', btn.dataset.category === category);
                     });
                     updateFilters();
                 });
@@ -595,10 +668,10 @@
                 addonsHTML += '<div class="space-y-3">';
                 category.files.forEach(file => {
                     addonsHTML += `
-                        <div class="glass-effect rounded-lg p-3 flex justify-between items-center">
+                        <div class="addon-item rounded-lg p-3 flex justify-between items-center">
                             <span>${file.name}</span>
-                            <a href="#" class="bg-slate-500/20 dark:bg-slate-800/30 hover:bg-slate-500/40 dark:hover:bg-slate-800/60 p-2 rounded-lg transition-colors">
-                                <i data-lucide="download" class="w-5 h-5"></i>
+                            <a href="#" class="addon-download-btn p-2 rounded-lg">
+                                <i data-lucide="download" class="w-5 h-5 text-muted"></i>
                             </a>
                         </div>
                     `;
@@ -612,52 +685,50 @@
         };
 
         // --- EVENT LISTENERS E INICIALIZAÇÃO ---
-        homeLink.addEventListener('click', goHome);
-        backHomeBtn.addEventListener('click', goHome);
-        backHomeBtnAnnouncements.addEventListener('click', goHome);
-        navLinks.forEach(link => link.addEventListener('click', (e) => {
-            e.preventDefault();
-            showPage(e.currentTarget.dataset.page);
-        }));
-        if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-        if (searchBtn) searchBtn.addEventListener('click', () => { searchInput.classList.toggle('active'); searchInput.focus(); });
-        if (searchInput) searchInput.addEventListener('input', updateFilters);
-        if (darkModeToggle) darkModeToggle.addEventListener('click', () => setDarkMode(!htmlElement.classList.contains('dark')));
-        langBtn.addEventListener('click', () => langMenu.classList.toggle('hidden'));
-        document.querySelectorAll('.lang-option').forEach(option => {
-            option.addEventListener('click', (e) => {
-                e.preventDefault();
-                const lang = e.currentTarget.getAttribute('data-lang');
-                setLanguage(lang);
-                langMenu.classList.add('hidden');
-            });
-        });
-
-        document.body.addEventListener('click', (e) => {
-            const addonsBtn = e.target.closest('.open-addons-btn');
-            if (addonsBtn) {
-                const gameId = parseInt(addonsBtn.dataset.gameId, 10);
-                openAddonsModal(gameId);
-            }
-        });
-        closeAddonsModalBtn.addEventListener('click', () => addonsModal.classList.add('hidden'));
-        addonsModal.querySelector('.modal-backdrop').addEventListener('click', () => addonsModal.classList.add('hidden'));
-        
-        viewAllBtn.addEventListener('click', () => {
-            document.querySelectorAll('#all-games-grid .game-wrapper').forEach(wrapper => {
-                wrapper.classList.remove('hidden');
-            });
-            viewAllContainer.classList.add('hidden');
-        });
-
         document.addEventListener('DOMContentLoaded', () => {
-            renderGames();
             const savedTheme = localStorage.getItem('darkMode');
             setDarkMode(savedTheme !== 'disabled');
             const savedLang = localStorage.getItem('language') || 'pt';
             setLanguage(savedLang);
-            generateCategoryFilters();
+
+            homeLink.addEventListener('click', goHome);
+            backHomeBtn.addEventListener('click', goHome);
+            backHomeBtnAnnouncements.addEventListener('click', goHome);
+            navLinks.forEach(link => link.addEventListener('click', (e) => {
+                e.preventDefault();
+                showPage(e.currentTarget.dataset.page);
+            }));
+            if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            if (searchBtn) searchBtn.addEventListener('click', () => { searchInput.classList.toggle('active'); searchInput.focus(); });
+            if (searchInput) searchInput.addEventListener('input', updateFilters);
+            if (darkModeToggle) darkModeToggle.addEventListener('click', () => setDarkMode(!htmlElement.classList.contains('dark')));
+            langBtn.addEventListener('click', () => langMenu.classList.toggle('hidden'));
+            document.querySelectorAll('.lang-option').forEach(option => {
+                option.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const lang = e.currentTarget.getAttribute('data-lang');
+                    setLanguage(lang);
+                    langMenu.classList.add('hidden');
+                });
+            });
+
+            document.body.addEventListener('click', (e) => {
+                const addonsBtn = e.target.closest('.open-addons-btn');
+                if (addonsBtn) {
+                    const gameId = parseInt(addonsBtn.dataset.gameId, 10);
+                    openAddonsModal(gameId);
+                }
+            });
+            closeAddonsModalBtn.addEventListener('click', () => addonsModal.classList.add('hidden'));
+            addonsModal.querySelector('.modal-backdrop').addEventListener('click', () => addonsModal.classList.add('hidden'));
+            
+            viewAllBtn.addEventListener('click', () => {
+                document.querySelectorAll('#all-games-grid .game-wrapper').forEach(wrapper => {
+                    wrapper.classList.remove('hidden');
+                });
+                viewAllContainer.classList.add('hidden');
+            });
         });
     </script>
 </body>
-</ht" from the most up-to-date Canvas "GameShare - Layout com Tema Claro Corrigido" document abo
+</html>
