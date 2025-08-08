@@ -120,10 +120,6 @@
              #searchInput.active { width: 120px; }
         }
         
-        .modal-backdrop {
-            background-color: rgba(0,0,0,0.7);
-            backdrop-filter: blur(5px);
-        }
         .category-filter.active {
             background-color: var(--accent-violet);
             color: white;
@@ -212,7 +208,7 @@
                     <!-- Seção de Jogos em Destaque -->
                     <section>
                         <h2 class="text-3xl font-bold mb-6 section-title" data-translate-key="featured_games_title">Jogos em Destaque</h2>
-                        <div id="featured-games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-5">
+                        <div id="featured-games-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-5">
                             <!-- Cards de Destaque serão injetados aqui -->
                         </div>
                     </section>
@@ -220,14 +216,16 @@
                     <!-- Seção de Todos os Jogos -->
                     <section class="mt-16">
                         <h2 class="text-3xl font-bold mb-6 section-title" data-translate-key="all_games_title">Todos os Jogos</h2>
-                        <div id="all-games-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+                        <div id="all-games-grid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
                             <!-- Cards de Todos os Jogos serão injetados aqui -->
-                            <!-- Mensagem de Nenhum Resultado (oculta por padrão) -->
-                            <div id="noResultsMessage" class="hidden text-center col-span-full py-10">
-                                <i data-lucide="frown" class="w-16 h-16 mx-auto text-muted"></i>
-                                <h3 class="mt-4 text-xl font-semibold" data-translate-key="no_results_title">Nenhum jogo encontrado</h3>
-                                <p class="text-muted" data-translate-key="no_results_subtitle">Tente pesquisar com outros termos.</p>
-                            </div>
+                        </div>
+                        <div id="view-all-container" class="text-center mt-8 hidden">
+                            <button id="view-all-btn" class="btn-gradient text-white px-8 py-3 rounded-lg font-bold" data-translate-key="view_all_button">Ver Todos</button>
+                        </div>
+                        <div id="noResultsMessage" class="hidden text-center col-span-full py-10">
+                            <i data-lucide="frown" class="w-16 h-16 mx-auto text-muted"></i>
+                            <h3 class="mt-4 text-xl font-semibold" data-translate-key="no_results_title">Nenhum jogo encontrado</h3>
+                            <p class="text-muted" data-translate-key="no_results_subtitle">Tente pesquisar com outros termos.</p>
                         </div>
                     </section>
                 </div>
@@ -331,16 +329,16 @@
 
         const translations = {
             en: {
-                nav_games: "Games", nav_apks: "APKs", nav_announcements: "Announcements", search_placeholder: "Search...", hero_title: "Your Universe of Discoveries", hero_subtitle: "Explore recommendations, find APKs, and dive into new adventures selected by the community.", featured_games_title: "Featured Games", all_games_title: "All Games", genre_action: "Action", genre_adventure: "Adventure", genre_action_rpg: "Action RPG", genre_rpg: "RPG", genre_roguelike: "Roguelike", genre_action_adventure: "Action-Adventure", genre_sandbox: "Sandbox", genre_metroidvania: "Metroidvania", genre_simulation: "Simulation", genre_platform: "Platform", no_results_title: "No games found", no_results_subtitle: "Try searching with other terms.", coming_soon_title: "Coming Soon", coming_soon_subtitle: "We are working on this section!", coming_soon_description: "New features and amazing games are on the way.", "404_button": "Back to Base", footer_copyright: "© 2024 GameShare. All rights reserved.", download_button: "Download", category_all: "All", genre_survival: "Survival", genre_puzzle: "Puzzle", genre_music: "Music", genre_strategy: "Strategy", genre_card: "Card Game", announcements_title: "Announcements", no_announcements: "No new announcements at the moment. Stay tuned for the next updates!", announcement_testing: "This site is in a testing phase. New features and games are constantly being added. Thank you for visiting!", addon_modal_title: "Add-ons for", addon_category_textures: "Textures", addon_category_shaders: "Shaders",
+                nav_games: "Games", nav_apks: "APKs", nav_announcements: "Announcements", search_placeholder: "Search...", hero_title: "Your Universe of Discoveries", hero_subtitle: "Explore recommendations, find APKs, and dive into new adventures selected by the community.", featured_games_title: "Featured Games", all_games_title: "All Games", genre_action: "Action", genre_adventure: "Adventure", genre_action_rpg: "Action RPG", genre_rpg: "RPG", genre_roguelike: "Roguelike", genre_action_adventure: "Action-Adventure", genre_sandbox: "Sandbox", genre_metroidvania: "Metroidvania", genre_simulation: "Simulation", genre_platform: "Platform", no_results_title: "No games found", no_results_subtitle: "Try searching with other terms.", coming_soon_title: "Coming Soon", coming_soon_subtitle: "We are working on this section!", coming_soon_description: "New features and amazing games are on the way.", "404_button": "Back to Base", footer_copyright: "© 2024 GameShare. All rights reserved.", download_button: "Download", category_all: "All", genre_survival: "Survival", genre_puzzle: "Puzzle", genre_music: "Music", genre_strategy: "Strategy", genre_card: "Card Game", announcements_title: "Announcements", no_announcements: "No new announcements at the moment. Stay tuned for the next updates!", announcement_testing: "This site is in a testing phase. New features and games are constantly being added. Thank you for visiting!", addon_modal_title: "Add-ons for", addon_category_textures: "Textures", addon_category_shaders: "Shaders", view_all_button: "View All",
             },
             pt: {
-                nav_games: "Games", nav_apks: "APKs", nav_announcements: "Anúncios", search_placeholder: "Pesquisar...", hero_title: "Seu Universo de Descobertas", hero_subtitle: "Explore recomendações, encontre APKs e mergulhe em novas aventuras selecionadas pela comunidade.", featured_games_title: "Jogos em Destaque", all_games_title: "Todos os Jogos", genre_action: "Ação", genre_adventure: "Aventura", genre_action_rpg: "RPG de Ação", genre_rpg: "RPG", genre_roguelike: "Roguelike", genre_action_adventure: "Ação-Aventura", genre_sandbox: "Sandbox", genre_metroidvania: "Metroidvania", genre_simulation: "Simulação", genre_platform: "Plataforma", no_results_title: "Nenhum jogo encontrado", no_results_subtitle: "Tente pesquisar com outros termos.", coming_soon_title: "Em Breve", coming_soon_subtitle: "Estamos a trabalhar nesta secção!", coming_soon_description: "Novas funcionalidades e jogos incríveis estão a caminho.", "404_button": "Voltar para a Base", footer_copyright: "© 2024 GameShare. Todos os direitos reservados.", download_button: "Baixar", category_all: "Todos", genre_survival: "Sobrevivência", genre_puzzle: "Puzzle", genre_music: "Música", genre_strategy: "Estratégia", genre_card: "Cartas", announcements_title: "Anúncios", no_announcements: "Nenhum anúncio novo no momento. Fique de olho para as próximas novidades!", announcement_testing: "Este site está em fase de testes. Novas funcionalidades e jogos são adicionados constantemente. Agradecemos a sua visita!", addon_modal_title: "Add-ons para", addon_category_textures: "Texturas", addon_category_shaders: "Shaders",
+                nav_games: "Games", nav_apks: "APKs", nav_announcements: "Anúncios", search_placeholder: "Pesquisar...", hero_title: "Seu Universo de Descobertas", hero_subtitle: "Explore recomendações, encontre APKs e mergulhe em novas aventuras selecionadas pela comunidade.", featured_games_title: "Jogos em Destaque", all_games_title: "Todos os Jogos", genre_action: "Ação", genre_adventure: "Aventura", genre_action_rpg: "RPG de Ação", genre_rpg: "RPG", genre_roguelike: "Roguelike", genre_action_adventure: "Ação-Aventura", genre_sandbox: "Sandbox", genre_metroidvania: "Metroidvania", genre_simulation: "Simulação", genre_platform: "Plataforma", no_results_title: "Nenhum jogo encontrado", no_results_subtitle: "Tente pesquisar com outros termos.", coming_soon_title: "Em Breve", coming_soon_subtitle: "Estamos a trabalhar nesta secção!", coming_soon_description: "Novas funcionalidades e jogos incríveis estão a caminho.", "404_button": "Voltar para a Base", footer_copyright: "© 2024 GameShare. Todos os direitos reservados.", download_button: "Baixar", category_all: "Todos", genre_survival: "Sobrevivência", genre_puzzle: "Puzzle", genre_music: "Música", genre_strategy: "Estratégia", genre_card: "Cartas", announcements_title: "Anúncios", no_announcements: "Nenhum anúncio novo no momento. Fique de olho para as próximas novidades!", announcement_testing: "Este site está em fase de testes. Novas funcionalidades e jogos são adicionados constantemente. Agradecemos a sua visita!", addon_modal_title: "Add-ons para", addon_category_textures: "Texturas", addon_category_shaders: "Shaders", view_all_button: "Ver Todos",
             },
             es: {
-                nav_games: "Juegos", nav_apks: "APKs", nav_announcements: "Anuncios", search_placeholder: "Buscar...", hero_title: "Tu Universo de Descubrimientos", hero_subtitle: "Explora recomendaciones, encuentra APKs y sumérgete en nuevas aventuras seleccionadas por la comunidad.", featured_games_title: "Juegos Destacados", all_games_title: "Todos los Juegos", genre_action: "Acción", genre_adventure: "Aventura", genre_action_rpg: "RPG de Acción", genre_rpg: "RPG", genre_roguelike: "Roguelike", genre_action_adventure: "Acción-Aventura", genre_sandbox: "Sandbox", genre_metroidvania: "Metroidvania", genre_simulation: "Simulación", genre_platform: "Plataforma", no_results_title: "No se encontraron juegos", no_results_subtitle: "Intenta buscar con otros términos.", coming_soon_title: "Próximamente", coming_soon_subtitle: "¡Estamos trabajando en esta sección!", coming_soon_description: "Nuevas características y juegos increíbles están en camino.", "404_button": "Volver a la Base", footer_copyright: "© 2024 GameShare. Todos los derechos reservados.", download_button: "Descargar", category_all: "Todos", genre_survival: "Supervivencia", genre_puzzle: "Puzzle", genre_music: "Música", genre_strategy: "Estrategia", genre_card: "Cartas", announcements_title: "Anuncios", no_announcements: "No hay anuncios nuevos por el momento. ¡Esté atento a las próximas actualizaciones!", announcement_testing: "Este sitio está en fase de pruebas. Nuevas características y juegos se añaden constantemente. ¡Gracias por su visita!", addon_modal_title: "Add-ons para", addon_category_textures: "Texturas", addon_category_shaders: "Shaders",
+                nav_games: "Juegos", nav_apks: "APKs", nav_announcements: "Anuncios", search_placeholder: "Buscar...", hero_title: "Tu Universo de Descubrimientos", hero_subtitle: "Explora recomendaciones, encuentra APKs y sumérgete en nuevas aventuras seleccionadas por la comunidad.", featured_games_title: "Juegos Destacados", all_games_title: "Todos los Juegos", genre_action: "Acción", genre_adventure: "Aventura", genre_action_rpg: "RPG de Acción", genre_rpg: "RPG", genre_roguelike: "Roguelike", genre_action_adventure: "Acción-Aventura", genre_sandbox: "Sandbox", genre_metroidvania: "Metroidvania", genre_simulation: "Simulación", genre_platform: "Plataforma", no_results_title: "No se encontraron juegos", no_results_subtitle: "Intenta buscar con otros términos.", coming_soon_title: "Próximamente", coming_soon_subtitle: "¡Estamos trabajando en esta sección!", coming_soon_description: "Nuevas características y juegos increíbles están en camino.", "404_button": "Volver a la Base", footer_copyright: "© 2024 GameShare. Todos los derechos reservados.", download_button: "Descargar", category_all: "Todos", genre_survival: "Supervivencia", genre_puzzle: "Puzzle", genre_music: "Música", genre_strategy: "Estrategia", genre_card: "Cartas", announcements_title: "Anuncios", no_announcements: "No hay anuncios nuevos por el momento. ¡Esté atento a las próximas actualizaciones!", announcement_testing: "Este sitio está en fase de pruebas. Nuevas características y juegos se añaden constantemente. ¡Gracias por su visita!", addon_modal_title: "Add-ons para", addon_category_textures: "Texturas", addon_category_shaders: "Shaders", view_all_button: "Ver Todos",
             },
             ru: {
-                nav_games: "Игры", nav_apks: "APKs", nav_announcements: "Объявления", search_placeholder: "Поиск...", hero_title: "Ваша Вселенная Открытий", hero_subtitle: "Изучайте рекомендации, находите APK и погружайтесь в новые приключения, выбранные сообществом.", featured_games_title: "Рекомендуемые Игры", all_games_title: "Все Игры", genre_action: "Экшен", genre_adventure: "Приключения", genre_action_rpg: "Экшен-РПГ", genre_rpg: "РПГ", genre_roguelike: "Рогалик", genre_action_adventure: "Экшен-приключение", genre_sandbox: "Песочница", genre_metroidvania: "Метроидвания", genre_simulation: "Симулятор", genre_platform: "Платформер", no_results_title: "Игры не найдены", no_results_subtitle: "Попробуйте поискать по другим терминам.", coming_soon_title: "Скоро", coming_soon_subtitle: "Мы работаем над этим разделом!", coming_soon_description: "Новые функции и потрясающие игры уже в пути.", "404_button": "Вернуться на базу", footer_copyright: "© 2024 GameShare. Все права защищены.", download_button: "Скачать", category_all: "Все", genre_survival: "Выживание", genre_puzzle: "Головоломка", genre_music: "Музыка", genre_strategy: "Стратегия", genre_card: "Карточная игра", announcements_title: "Объявления", no_announcements: "На данный момент новых объявлений нет. Следите за обновлениями!", announcement_testing: "Этот сайт находится в стадии тестирования. Постоянно добавляются новые функции и игры. Спасибо за ваш визит!", addon_modal_title: "Аддоны для", addon_category_textures: "Текстуры", addon_category_shaders: "Шейдеры",
+                nav_games: "Игры", nav_apks: "APKs", nav_announcements: "Объявления", search_placeholder: "Поиск...", hero_title: "Ваша Вселенная Открытий", hero_subtitle: "Изучайте рекомендации, находите APK и погружайтесь в новые приключения, выбранные сообществом.", featured_games_title: "Рекомендуемые Игры", all_games_title: "Все Игры", genre_action: "Экшен", genre_adventure: "Приключения", genre_action_rpg: "Экшен-РПГ", genre_rpg: "РПГ", genre_roguelike: "Рогалик", genre_action_adventure: "Экшен-приключение", genre_sandbox: "Песочница", genre_metroidvania: "Метроидвания", genre_simulation: "Симулятор", genre_platform: "Платформер", no_results_title: "Игры не найдены", no_results_subtitle: "Попробуйте поискать по другим терминам.", coming_soon_title: "Скоро", coming_soon_subtitle: "Мы работаем над этим разделом!", coming_soon_description: "Новые функции и потрясающие игры уже в пути.", "404_button": "Вернуться на базу", footer_copyright: "© 2024 GameShare. Все права защищены.", download_button: "Скачать", category_all: "Все", genre_survival: "Выживание", genre_puzzle: "Головоломка", genre_music: "Музыка", genre_strategy: "Стратегия", genre_card: "Карточная игра", announcements_title: "Объявления", no_announcements: "На данный момент новых объявлений нет. Следите за обновлениями!", announcement_testing: "Этот сайт находится в стадии тестирования. Постоянно добавляются новые функции и игры. Спасибо за ваш визит!", addon_modal_title: "Аддоны для", addon_category_textures: "Текстуры", addon_category_shaders: "Шейдеры", view_all_button: "Показать все",
             }
         };
 
@@ -367,6 +365,8 @@
         const closeAddonsModalBtn = document.getElementById('closeAddonsModalBtn');
         const addonsModalTitle = document.getElementById('addonsModalTitle');
         const addonsModalContent = document.getElementById('addonsModalContent');
+        const viewAllContainer = document.getElementById('view-all-container');
+        const viewAllBtn = document.getElementById('view-all-btn');
         
         // --- FUNÇÕES ---
         
@@ -406,22 +406,24 @@
             let featuredHTML = '';
             let allGamesHTML = '';
             
-            gamesData.forEach(game => {
+            gamesData.forEach((game, index) => {
                 const cardHTML = createGameCardHTML(game);
                 if (game.featured) {
                     featuredHTML += cardHTML;
                 }
-                allGamesHTML += cardHTML;
+                const isVisibleInitially = index < 4;
+                const cardWrapper = `<div class="game-wrapper ${isVisibleInitially ? '' : 'hidden'}">${cardHTML}</div>`;
+                allGamesHTML += cardWrapper;
             });
 
             featuredGrid.innerHTML = featuredHTML;
-            allGamesGrid.innerHTML = allGamesHTML + `
-                <div id="noResultsMessage" class="hidden text-center col-span-full py-10">
-                    <i data-lucide="frown" class="w-16 h-16 mx-auto text-muted"></i>
-                    <h3 class="mt-4 text-xl font-semibold" data-translate-key="no_results_title">Nenhum jogo encontrado</h3>
-                    <p class="text-muted" data-translate-key="no_results_subtitle">Tente pesquisar com outros termos.</p>
-                </div>
-            `;
+            allGamesGrid.innerHTML = allGamesHTML;
+            
+            if (gamesData.length > 4) {
+                viewAllContainer.classList.remove('hidden');
+            } else {
+                viewAllContainer.classList.add('hidden');
+            }
             lucide.createIcons();
         };
 
@@ -456,18 +458,26 @@
             const searchTerm = searchInput.value.toLowerCase();
             const activeCategory = document.querySelector('.category-filter.active')?.dataset.category;
             let visibleGames = 0;
-            document.querySelectorAll('.game-card').forEach(card => {
+            document.querySelectorAll('.game-wrapper').forEach(wrapper => {
+                const card = wrapper.querySelector('.game-card');
                 const title = card.querySelector('h3').textContent.toLowerCase();
                 const categories = card.dataset.categories.split(',');
-                const searchMatch = title.includes(searchTerm);
+                const gameData = gamesData.find(g => g.title === card.querySelector('h3').textContent);
+                let addonsMatch = false;
+                if(gameData && gameData.hasAddons){
+                    addonsMatch = gameData.addons.some(cat => cat.files.some(file => file.name.toLowerCase().includes(searchTerm)));
+                }
+
+                const searchMatch = title.includes(searchTerm) || addonsMatch;
                 const categoryMatch = !activeCategory || activeCategory === 'Todos' || categories.includes(activeCategory);
                 const isVisible = searchMatch && categoryMatch;
-                card.style.display = isVisible ? 'flex' : 'none';
+                wrapper.style.display = isVisible ? 'block' : 'none';
                 if(isVisible) visibleGames++;
             });
             const isFiltering = searchTerm.length > 0 || (activeCategory && activeCategory !== 'Todos');
             document.querySelectorAll('.section-title').forEach(title => title.style.display = isFiltering ? 'none' : 'block');
             document.getElementById('noResultsMessage').style.display = (visibleGames === 0 && isFiltering) ? 'block' : 'none';
+            viewAllContainer.style.display = isFiltering ? 'none' : (gamesData.length > 4 ? 'block' : 'none');
         };
 
         const generateCategoryFilters = () => {
@@ -576,6 +586,13 @@
         });
         closeAddonsModalBtn.addEventListener('click', () => addonsModal.classList.add('hidden'));
         addonsModal.querySelector('.modal-backdrop').addEventListener('click', () => addonsModal.classList.add('hidden'));
+        
+        viewAllBtn.addEventListener('click', () => {
+            document.querySelectorAll('#all-games-grid .game-wrapper').forEach(wrapper => {
+                wrapper.classList.remove('hidden');
+            });
+            viewAllContainer.classList.add('hidden');
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
             renderGames();
