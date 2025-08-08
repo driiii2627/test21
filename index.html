@@ -207,7 +207,8 @@
                     <!-- Seção de Jogos em Destaque -->
                     <section>
                         <h2 class="text-3xl font-bold mb-6 section-title" data-translate-key="featured_games_title">Jogos em Destaque</h2>
-                        <div id="featured-games-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
+                        <!-- MODIFICATION: Added more columns for larger screen sizes -->
+                        <div id="featured-games-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-5">
                             <!-- Cards de Destaque serão injetados aqui -->
                         </div>
                     </section>
@@ -215,7 +216,8 @@
                     <!-- Seção de Todos os Jogos -->
                     <section class="mt-16">
                         <h2 class="text-3xl font-bold mb-6 section-title" data-translate-key="all_games_title">Todos os Jogos</h2>
-                        <div id="all-games-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5">
+                        <!-- MODIFICATION: Added more columns for larger screen sizes -->
+                        <div id="all-games-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-4 sm:gap-5">
                             <!-- Cards de Todos os Jogos serão injetados aqui -->
                         </div>
                         <div id="view-all-container" class="text-center mt-8 hidden">
@@ -415,7 +417,8 @@
                 if (game.featured) {
                     featuredHTML += `<div class="game-wrapper">${cardHTML}</div>`;
                 }
-                const isVisibleInitially = index < 10; // Show more games initially
+                // MODIFICATION: Changed number of initially visible games
+                const isVisibleInitially = index < 14; 
                 const cardWrapper = `<div class="game-wrapper ${isVisibleInitially ? '' : 'hidden'}">${cardHTML}</div>`;
                 allGamesHTML += cardWrapper;
             });
@@ -423,7 +426,8 @@
             featuredGrid.innerHTML = featuredHTML;
             allGamesGrid.innerHTML = allGamesHTML;
             
-            if (gamesData.length > 10) {
+            // MODIFICATION: Changed number for "View All" button visibility
+            if (gamesData.length > 14) {
                 viewAllContainer.classList.remove('hidden');
             } else {
                 viewAllContainer.classList.add('hidden');
@@ -481,7 +485,7 @@
             const isFiltering = searchTerm.length > 0 || (activeCategory && activeCategory !== 'Todos');
             document.querySelectorAll('.section-title').forEach(title => title.style.display = isFiltering ? 'none' : 'block');
             document.getElementById('noResultsMessage').style.display = (visibleGames === 0 && isFiltering) ? 'block' : 'none';
-            viewAllContainer.style.display = isFiltering ? 'none' : (gamesData.length > 10 ? 'block' : 'none');
+            viewAllContainer.style.display = isFiltering ? 'none' : (gamesData.length > 14 ? 'block' : 'none');
         };
 
         const generateCategoryFilters = () => {
