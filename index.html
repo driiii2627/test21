@@ -139,17 +139,18 @@
     <div id="app" class="w-full px-4 sm:px-6 lg:px-8">
         <!-- Cabeçalho -->
         <header class="glass-effect sticky top-4 z-40 flex justify-between items-center py-3 px-6 rounded-2xl mt-4">
-            <div class="flex items-center space-x-8">
-                <a href="#" id="homeLink" class="flex items-center space-x-2 cursor-pointer flex-shrink-0">
+            <div class="flex-shrink-0">
+                <a href="#" id="homeLink" class="flex items-center space-x-2 cursor-pointer">
                     <i data-lucide="gamepad-2" class="w-8 h-8 text-violet-400"></i>
                     <span class="text-2xl font-bold text-inherit">GameShare</span>
                 </a>
-                <nav class="hidden md:flex items-center space-x-6">
-                    <a href="#" class="nav-link text-muted hover:text-inherit font-medium transition-colors flex items-center space-x-2" data-page="page404" data-translate-key="nav_games"><i data-lucide="swords" class="w-4 h-4"></i><span>Games</span></a>
-                    <a href="#" class="nav-link text-muted hover:text-inherit font-medium transition-colors flex items-center space-x-2" data-page="page404" data-translate-key="nav_apks"><i data-lucide="smartphone" class="w-4 h-4"></i><span>APKs</span></a>
-                    <a href="#" class="nav-link text-muted hover:text-inherit font-medium transition-colors flex items-center space-x-2" data-page="announcementsPage" data-translate-key="nav_announcements"><i data-lucide="megaphone" class="w-4 h-4"></i><span>Anúncios</span></a>
-                </nav>
             </div>
+
+            <nav class="hidden md:flex items-center space-x-6 mx-auto">
+                <a href="#" class="nav-link text-muted hover:text-inherit font-medium transition-colors flex items-center space-x-2" data-page="page404" data-translate-key="nav_games"><i data-lucide="swords" class="w-4 h-4"></i><span>Games</span></a>
+                <a href="#" class="nav-link text-muted hover:text-inherit font-medium transition-colors flex items-center space-x-2" data-page="page404" data-translate-key="nav_apks"><i data-lucide="smartphone" class="w-4 h-4"></i><span>APKs</span></a>
+                <a href="#" class="nav-link text-muted hover:text-inherit font-medium transition-colors flex items-center space-x-2" data-page="announcementsPage" data-translate-key="nav_announcements"><i data-lucide="megaphone" class="w-4 h-4"></i><span>Anúncios</span></a>
+            </nav>
 
             <div class="flex items-center space-x-2 sm:space-x-4">
                 <div class="hidden sm:flex items-center">
@@ -181,9 +182,9 @@
         
         <!-- Menu Mobile -->
         <div id="mobileMenu" class="hidden md:hidden glass-effect rounded-2xl mt-2 p-4">
-             <a href="#" class="nav-link block text-muted hover:text-inherit py-2 flex items-center space-x-2" data-page="page404" data-translate-key="nav_games"><i data-lucide="swords" class="w-4 h-4"></i><span>Games</span></a>
-             <a href="#" class="nav-link block text-muted hover:text-inherit py-2 flex items-center space-x-2" data-page="page404" data-translate-key="nav_apks"><i data-lucide="smartphone" class="w-4 h-4"></i><span>APKs</span></a>
-             <a href="#" class="nav-link block text-muted hover:text-inherit py-2 flex items-center space-x-2" data-page="announcementsPage" data-translate-key="nav_announcements"><i data-lucide="megaphone" class="w-4 h-4"></i><span>Anúncios</span></a>
+             <a href="#" class="nav-link block text-muted hover:text-inherit py-2 flex items-center space-x-2" data-page="page404" data-translate-key="nav_games_mobile"><i data-lucide="swords" class="w-4 h-4"></i><span>Games</span></a>
+             <a href="#" class="nav-link block text-muted hover:text-inherit py-2 flex items-center space-x-2" data-page="page404" data-translate-key="nav_apks_mobile"><i data-lucide="smartphone" class="w-4 h-4"></i><span>APKs</span></a>
+             <a href="#" class="nav-link block text-muted hover:text-inherit py-2 flex items-center space-x-2" data-page="announcementsPage" data-translate-key="nav_announcements_mobile"><i data-lucide="megaphone" class="w-4 h-4"></i><span>Anúncios</span></a>
         </div>
 
         <!-- Conteúdo Principal -->
