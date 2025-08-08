@@ -11,6 +11,7 @@
         :root {
             --background-color: #0D1117;
             --card-background: rgba(15, 23, 42, 0.6);
+            --card-content-bg: #0f172a; /* Cor sólida do conteúdo do card (slate-900) */
             --glass-background: rgba(30, 41, 59, 0.5);
             --text-primary: #E2E8F0;
             --text-muted: #94A3B8;
@@ -22,6 +23,7 @@
         html.light {
             --background-color: #e2e8f0; /* slate-200 */
             --card-background: rgba(203, 213, 225, 0.6); /* slate-300 */
+            --card-content-bg: #ffffff;
             --glass-background: rgba(226, 232, 240, 0.7); /* slate-200 */
             --text-primary: #1e293b; /* slate-800 */
             --text-muted: #475569; /* slate-600 */
@@ -131,6 +133,19 @@
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */
         }
+
+        /* MODIFICATION: Gradient overlay for category animation */
+        .category-container.is-overflowing::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 40px;
+            background: linear-gradient(to left, var(--card-content-bg), transparent);
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
     </style>
 </head>
 <body class="transition-colors duration-300">
@@ -207,7 +222,8 @@
                     <!-- Seção de Jogos em Destaque -->
                     <section>
                         <h2 class="text-3xl font-bold mb-6 section-title" data-translate-key="featured_games_title">Jogos em Destaque</h2>
-                        <div id="featured-games-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-5">
+                        <!-- MODIFICATION: Adjusted grid for larger cards on PC -->
+                        <div id="featured-games-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5">
                             <!-- Cards de Destaque serão injetados aqui -->
                         </div>
                     </section>
@@ -215,7 +231,8 @@
                     <!-- Seção de Todos os Jogos -->
                     <section class="mt-16">
                         <h2 class="text-3xl font-bold mb-6 section-title" data-translate-key="all_games_title">Todos os Jogos</h2>
-                        <div id="all-games-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-4 sm:gap-5">
+                        <!-- MODIFICATION: Adjusted grid for larger cards on PC -->
+                        <div id="all-games-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-5">
                             <!-- Cards de Todos os Jogos serão injetados aqui -->
                         </div>
                         <div id="view-all-container" class="text-center mt-8 hidden">
@@ -375,7 +392,7 @@
                     <div class="relative">
                         <img src="${game.image}" alt="${game.title}" class="w-full aspect-square object-cover" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0D1117/E2E8F0?text=Image+Not+Found';">
                     </div>
-                    <div class="p-4 flex flex-col flex-grow bg-slate-900/50">
+                    <div class="p-4 flex flex-col flex-grow bg-slate-900/80">
                         <div class="flex-grow">
                             <h3 class="font-bold text-lg mb-2 text-primary truncate">${game.title}</h3>
                             <div class="category-container relative h-7 flex items-center overflow-hidden mb-3">
@@ -401,16 +418,23 @@
                 const list = container.querySelector('.category-list');
                 if (!list || list.children.length < 2) return;
 
-                // Clear any existing interval
                 if (container.intervalId) {
                     clearInterval(container.intervalId);
+                    container.intervalId = null;
+                }
+                 if (container.resizeObserver) {
+                    container.resizeObserver.disconnect();
                 }
 
                 const checkAndAnimate = () => {
-                    if (list.scrollWidth > container.clientWidth) {
-                        if (!container.intervalId) { // Start animation only if not already running
+                    const isOverflowing = list.scrollWidth > container.clientWidth;
+                    container.classList.toggle('is-overflowing', isOverflowing);
+
+                    if (isOverflowing) {
+                        if (!container.intervalId) {
                              container.intervalId = setInterval(() => {
                                 const firstTag = list.children[0];
+                                if (!firstTag) return;
                                 const tagWidth = firstTag.offsetWidth;
                                 const gap = parseInt(window.getComputedStyle(list).gap) || 8;
 
@@ -425,7 +449,6 @@
                             }, 2500);
                         }
                     } else {
-                        // Stop animation if it's not overflowing anymore
                         if (container.intervalId) {
                             clearInterval(container.intervalId);
                             container.intervalId = null;
@@ -435,9 +458,10 @@
                     }
                 };
                 
-                checkAndAnimate(); // Check immediately on load
-                // Re-check on window resize
-                new ResizeObserver(checkAndAnimate).observe(container);
+                // Use a slight delay to ensure layout is calculated
+                setTimeout(checkAndAnimate, 50);
+                container.resizeObserver = new ResizeObserver(checkAndAnimate);
+                container.resizeObserver.observe(container);
             });
         };
 
@@ -464,7 +488,7 @@
                 viewAllContainer.classList.add('hidden');
             }
             lucide.createIcons();
-            initCategoryAnimation(); // Initialize animations after rendering
+            initCategoryAnimation();
         };
 
         const setLanguage = (lang) => {
@@ -518,7 +542,7 @@
             document.querySelectorAll('.section-title').forEach(title => title.style.display = isFiltering ? 'none' : 'block');
             document.getElementById('noResultsMessage').style.display = (visibleGames === 0 && isFiltering) ? 'block' : 'none';
             viewAllContainer.style.display = isFiltering ? 'none' : (gamesData.length > 14 ? 'block' : 'none');
-            initCategoryAnimation(); // Re-initialize animations after filtering
+            initCategoryAnimation();
         };
 
         const generateCategoryFilters = () => {
