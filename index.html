@@ -13,23 +13,7 @@
         /* ============================================= */
         /* Define as variáveis para qualquer elemento que tenha o atributo data-theme.
            Isso é a chave para as pré-visualizações funcionarem. */
-        :root {
-            --background-color: #0D1117;
-            --card-background: rgba(15, 23, 42, 0.6);
-            --card-content-bg: rgba(15, 23, 42, 0.8);
-            --glass-background: rgba(30, 41, 59, 0.5);
-            --text-primary: #E2E8F0;
-            --text-muted: #94A3B8;
-            --border-color: rgba(255, 255, 255, 0.1);
-            --accent-violet: #8b5cf6;
-            --accent-blue: #3b82f6;
-            --button-hover-bg: rgba(51, 65, 85, 0.8);
-            --button-bg: rgba(51, 65, 85, 0.6);
-            --category-tag-bg: rgba(139, 92, 246, 0.2);
-            --category-tag-text: #c4b5fd;
-            --header-hover-bg: #1e293b;
-        }
-
+        :root,
         [data-theme='gamer-dark'] {
             --background-color: #0D1117;
             --card-background: rgba(15, 23, 42, 0.6);
@@ -216,7 +200,7 @@
             </div>
 
             <nav class="hidden md:flex items-center space-x-6 mx-auto">
-                <a href="#" class="nav-link text-muted hover:text-inherit font-medium transition-colors flex items-center space-x-2" data-page="page404" data-translate-key="nav_games"><i data-lucide="swords" class="w-4 h-4"></i><span>Jogos</span></a>
+                <a href="#" class="nav-link text-muted hover:text-inherit font-medium transition-colors flex items-center space-x-2" data-page="mainContent" data-translate-key="nav_games"><i data-lucide="swords" class="w-4 h-4"></i><span>Jogos</span></a>
                 <a href="#" class="nav-link text-muted hover:text-inherit font-medium transition-colors flex items-center space-x-2" data-page="page404" data-translate-key="nav_apks"><i data-lucide="smartphone" class="w-4 h-4"></i><span>APKs</span></a>
                 <a href="#" class="nav-link text-muted hover:text-inherit font-medium transition-colors flex items-center space-x-2" data-page="announcementsPage" data-translate-key="nav_announcements"><i data-lucide="megaphone" class="w-4 h-4"></i><span>Anúncios</span></a>
             </nav>
@@ -248,7 +232,14 @@
             </div>
         </header>
         
-        <!-- Conteúdo e outras páginas... -->
+        <!-- Menu Mobile -->
+        <div id="mobileMenu" class="hidden md:hidden glass-effect rounded-2xl mt-2 p-4">
+             <a href="#" class="nav-link block text-muted hover:text-inherit py-2 flex items-center space-x-2" data-page="mainContent" data-translate-key="nav_games_mobile"><i data-lucide="swords" class="w-4 h-4"></i><span>Jogos</span></a>
+             <a href="#" class="nav-link block text-muted hover:text-inherit py-2 flex items-center space-x-2" data-page="page404" data-translate-key="nav_apks_mobile"><i data-lucide="smartphone" class="w-4 h-4"></i><span>APKs</span></a>
+             <a href="#" class="nav-link block text-muted hover:text-inherit py-2 flex items-center space-x-2" data-page="announcementsPage" data-translate-key="nav_announcements_mobile"><i data-lucide="megaphone" class="w-4 h-4"></i><span>Anúncios</span></a>
+        </div>
+
+        <!-- Conteúdo Principal -->
         <div id="mainContent">
             <main class="mt-8">
                 <section class="hero-background rounded-2xl shadow-2xl p-8 md:p-16 text-center overflow-hidden">
@@ -282,7 +273,15 @@
             <i data-lucide="wrench" class="w-24 h-24 mx-auto" style="color: var(--accent-violet)"></i>
             <h1 class="text-6xl font-extrabold mt-8" data-translate-key="coming_soon_title">Em Breve</h1>
             <p class="text-xl text-muted mt-4" data-translate-key="coming_soon_subtitle">Estamos a trabalhar nesta secção!</p>
-            <button id="backHomeBtn" class="mt-8 btn-gradient text-white px-8 py-3 rounded-lg font-bold text-lg" data-translate-key="404_button">Voltar para a Base</button>
+            <button id="backHomeBtn404" class="mt-8 btn-gradient text-white px-8 py-3 rounded-lg font-bold text-lg" data-translate-key="404_button">Voltar para a Base</button>
+        </div>
+        <div id="announcementsPage" class="hidden text-center py-20">
+            <i data-lucide="megaphone" class="w-24 h-24 mx-auto text-muted"></i>
+            <h1 class="text-4xl font-bold mt-8" data-translate-key="announcements_title">Anúncios</h1>
+            <div class="glass-effect rounded-2xl p-8 max-w-4xl mx-auto mt-8">
+                <p class="text-lg text-muted" data-translate-key="announcement_testing">Este site está em fase de testes. Novas funcionalidades e jogos são adicionados constantemente. Agradecemos a sua visita!</p>
+            </div>
+            <button id="backHomeBtnAnnouncements" class="mt-8 btn-gradient text-white px-8 py-3 rounded-lg font-bold text-lg" data-translate-key="404_button">Voltar para a Base</button>
         </div>
     </div>
     
@@ -336,8 +335,8 @@
         ];
 
         const translations = {
-            en: { theme_modal_title: "Select Theme", nav_games: "Games", nav_apks: "APKs", nav_announcements: "Announcements", search_placeholder: "Search...", hero_title: "Your Universe of Discoveries", hero_subtitle: "Explore recommendations, find APKs, and dive into new adventures selected by the community.", featured_games_title: "Featured Games", all_games_title: "All Games", genre_sandbox: "Sandbox", genre_aventura: "Adventure", genre_sobrevivência: "Survival", "genre_mundo_aberto": "Open World", no_results_title: "No games found", no_results_subtitle: "Try searching with other terms.", coming_soon_title: "Coming Soon", coming_soon_subtitle: "We are working on this section!", "404_button": "Back to Base", download_button: "Download", category_all: "All", addon_modal_title: "Add-ons for", view_all_button: "View All", theme_name_matrix: "Matrix" },
-            pt: { theme_modal_title: "Selecionar Tema", nav_games: "Jogos", nav_apks: "APKs", nav_announcements: "Anúncios", search_placeholder: "Pesquisar...", hero_title: "Seu Universo de Descobertas", hero_subtitle: "Explore recomendações, encontre APKs e mergulhe em novas aventuras selecionadas pela comunidade.", featured_games_title: "Jogos em Destaque", all_games_title: "Todos os Jogos", genre_sandbox: "Sandbox", genre_aventura: "Aventura", genre_sobrevivência: "Sobrevivência", "genre_mundo_aberto": "Mundo Aberto", no_results_title: "Nenhum jogo encontrado", no_results_subtitle: "Tente pesquisar com outros termos.", coming_soon_title: "Em Breve", coming_soon_subtitle: "Estamos a trabalhar nesta secção!", "404_button": "Voltar para a Base", download_button: "Baixar", category_all: "Todos", addon_modal_title: "Add-ons para", view_all_button: "Ver Todos", theme_name_matrix: "Matriz" },
+            en: { theme_modal_title: "Select Theme", nav_games: "Games", nav_apks: "APKs", nav_announcements: "Announcements", nav_games_mobile: "Games", nav_apks_mobile: "APKs", nav_announcements_mobile: "Announcements", search_placeholder: "Search...", hero_title: "Your Universe of Discoveries", hero_subtitle: "Explore recommendations, find APKs, and dive into new adventures selected by the community.", featured_games_title: "Featured Games", all_games_title: "All Games", genre_sandbox: "Sandbox", genre_aventura: "Adventure", genre_sobrevivência: "Survival", "genre_mundo_aberto": "Open World", no_results_title: "No games found", no_results_subtitle: "Try searching with other terms.", coming_soon_title: "Coming Soon", coming_soon_subtitle: "We are working on this section!", "404_button": "Back to Base", download_button: "Download", category_all: "All", addon_modal_title: "Add-ons for", view_all_button: "View All", theme_name_matrix: "Matrix", announcements_title: "Announcements", announcement_testing: "This site is in a testing phase. New features and games are constantly being added. Thank you for your visit!" },
+            pt: { theme_modal_title: "Selecionar Tema", nav_games: "Jogos", nav_apks: "APKs", nav_announcements: "Anúncios", nav_games_mobile: "Jogos", nav_apks_mobile: "APKs", nav_announcements_mobile: "Anúncios", search_placeholder: "Pesquisar...", hero_title: "Seu Universo de Descobertas", hero_subtitle: "Explore recomendações, encontre APKs e mergulhe em novas aventuras selecionadas pela comunidade.", featured_games_title: "Jogos em Destaque", all_games_title: "Todos os Jogos", genre_sandbox: "Sandbox", genre_aventura: "Aventura", genre_sobrevivência: "Sobrevivência", "genre_mundo_aberto": "Mundo Aberto", no_results_title: "Nenhum jogo encontrado", no_results_subtitle: "Tente pesquisar com outros termos.", coming_soon_title: "Em Breve", coming_soon_subtitle: "Estamos a trabalhar nesta secção!", "404_button": "Voltar para a Base", download_button: "Baixar", category_all: "Todos", addon_modal_title: "Add-ons para", view_all_button: "Ver Todos", theme_name_matrix: "Matriz", announcements_title: "Anúncios", announcement_testing: "Este site está em fase de testes. Novas funcionalidades e jogos são adicionados constantemente. Agradecemos a sua visita!" },
         };
 
         // ===================================================================================
@@ -394,15 +393,17 @@
             const allGamesGrid = $('#all-games-grid');
             const viewAllContainer = $('#view-all-container');
 
-            featuredGrid.innerHTML = gamesData.filter(g => g.featured).map(createGameCardHTML).join('');
+            if (featuredGrid) featuredGrid.innerHTML = gamesData.filter(g => g.featured).map(createGameCardHTML).join('');
             
-            const allGamesHTML = gamesData.map((game, index) => {
-                const isVisibleInitially = index < 14;
-                return `<div class="game-wrapper ${isVisibleInitially ? '' : 'hidden'}" data-title="${game.title}" data-categories="${game.categories.join(',')}">${createGameCardHTML(game)}</div>`;
-            }).join('');
-            allGamesGrid.innerHTML = allGamesHTML;
+            if (allGamesGrid) {
+                const allGamesHTML = gamesData.map((game, index) => {
+                    const isVisibleInitially = index < 14;
+                    return `<div class="game-wrapper ${isVisibleInitially ? '' : 'hidden'}" data-title="${game.title}" data-categories="${game.categories.join(',')}">${createGameCardHTML(game)}</div>`;
+                }).join('');
+                allGamesGrid.innerHTML = allGamesHTML;
+            }
             
-            viewAllContainer.classList.toggle('hidden', gamesData.length <= 14);
+            if(viewAllContainer) viewAllContainer.classList.toggle('hidden', gamesData.length <= 14);
 
             lucide.createIcons();
             initCategoryAnimation();
@@ -414,13 +415,17 @@
             const langTranslations = translations[lang] || translations.pt;
             $$('[data-translate-key]').forEach(el => {
                 const key = el.dataset.translateKey;
+                const translation = langTranslations[key];
+                if(translation === undefined) return;
+
                 const span = el.querySelector('span');
                 if (el.placeholder) {
-                    el.placeholder = langTranslations[key] || el.placeholder;
-                } else if (span) {
-                    span.textContent = langTranslations[key] || span.textContent;
+                    el.placeholder = translation;
+                } else if (span && !el.classList.contains('nav-link')) {
+                     // Avoid replacing entire nav-link content if it has an icon
+                    span.textContent = translation;
                 } else {
-                    el.textContent = langTranslations[key] || el.textContent;
+                    el.textContent = translation;
                 }
             });
             generateCategoryFilters();
@@ -438,6 +443,7 @@
 
         const generateThemePreviews = () => {
             const themeGrid = $('#themeGrid');
+            if(!themeGrid) return;
             const currentLang = localStorage.getItem('language') || 'pt';
             
             themeGrid.innerHTML = themes.map(theme => {
@@ -471,10 +477,16 @@
         
         // --- Funções de UI e Animações ---
         const showPage = (pageId) => {
-            $('#mainContent').classList.add('hidden');
-            $('#page404').classList.add('hidden');
+            $('#mainContent')?.classList.add('hidden');
+            $('#page404')?.classList.add('hidden');
+            $('#announcementsPage')?.classList.add('hidden');
+            
             const pageToShow = $(`#${pageId}`);
-            if(pageToShow) pageToShow.classList.remove('hidden');
+            if(pageToShow) {
+                pageToShow.classList.remove('hidden');
+            } else {
+                $('#page404')?.classList.remove('hidden');
+            }
         };
 
         const initCategoryAnimation = () => {
@@ -520,7 +532,10 @@
         };
         
         const updateFilters = () => {
-            const searchTerm = $('#searchInput').value.toLowerCase();
+            const searchInput = $('#searchInput');
+            if(!searchInput) return;
+
+            const searchTerm = searchInput.value.toLowerCase();
             const activeCategory = $('.category-filter.active')?.dataset.category;
             
             let totalVisible = 0;
@@ -536,12 +551,18 @@
 
             const isFiltering = searchTerm.length > 0 || (activeCategory && activeCategory !== 'Todos');
             $$('.section-title').forEach(title => title.style.display = isFiltering ? 'none' : 'block');
-            $('#noResultsMessage').style.display = (totalVisible === 0 && isFiltering) ? 'block' : 'none';
-            $('#view-all-container').style.display = isFiltering ? 'none' : (gamesData.length > 14 ? 'block' : 'none');
+            
+            const noResultsMessage = $('#noResultsMessage');
+            if(noResultsMessage) noResultsMessage.style.display = (totalVisible === 0 && isFiltering) ? 'block' : 'none';
+            
+            const viewAllContainer = $('#view-all-container');
+            if(viewAllContainer) viewAllContainer.style.display = isFiltering ? 'none' : (gamesData.length > 14 ? 'block' : 'none');
         };
 
         const generateCategoryFilters = () => {
             const categoryFilterBar = $('#category-filter-bar');
+            if(!categoryFilterBar) return;
+
             const categories = new Set(gamesData.flatMap(game => game.categories));
             const currentLang = localStorage.getItem('language') || 'pt';
             const allText = translations[currentLang]?.category_all || "Todos";
@@ -565,6 +586,7 @@
 
         const openAddonsModal = (gameId) => {
             const addonsModal = $('#addonsModal');
+            if(!addonsModal) return;
             const game = gamesData.find(g => g.id === gameId);
             if (!game || !game.hasAddons) return;
 
@@ -605,32 +627,33 @@
             setTheme(savedTheme);
 
             // --- Listeners Gerais ---
-            $('#homeLink').addEventListener('click', (e) => { e.preventDefault(); showPage('mainContent'); });
-            $('#backHomeBtn').addEventListener('click', (e) => { e.preventDefault(); showPage('mainContent'); });
-            $('#searchBtn').addEventListener('click', () => { $('#searchInput').classList.toggle('active'); $('#searchInput').focus(); });
-            $('#searchInput').addEventListener('input', updateFilters);
-            $('#view-all-btn').addEventListener('click', () => {
+            $('#homeLink')?.addEventListener('click', (e) => { e.preventDefault(); showPage('mainContent'); });
+            $('#backHomeBtn404')?.addEventListener('click', (e) => { e.preventDefault(); showPage('mainContent'); });
+            $('#backHomeBtnAnnouncements')?.addEventListener('click', (e) => { e.preventDefault(); showPage('mainContent'); });
+            $('#searchBtn')?.addEventListener('click', () => { $('#searchInput')?.classList.toggle('active'); $('#searchInput')?.focus(); });
+            $('#searchInput')?.addEventListener('input', updateFilters);
+            $('#view-all-btn')?.addEventListener('click', () => {
                 $$('#all-games-grid .game-wrapper').forEach(w => w.classList.remove('hidden'));
-                $('#view-all-container').classList.add('hidden');
+                $('#view-all-container')?.classList.add('hidden');
             });
 
             // --- Listeners de Navegação e Menus ---
             $$('.nav-link').forEach(link => link.addEventListener('click', (e) => { e.preventDefault(); showPage(e.currentTarget.dataset.page); }));
-            $('#mobileMenuBtn')?.addEventListener('click', () => $('#mobileMenu').classList.toggle('hidden'));
-            $('#langBtn').addEventListener('click', () => $('#langMenu').classList.toggle('hidden'));
+            $('#mobileMenuBtn')?.addEventListener('click', () => $('#mobileMenu')?.classList.toggle('hidden'));
+            $('#langBtn')?.addEventListener('click', () => $('#langMenu')?.classList.toggle('hidden'));
             $$('.lang-option').forEach(option => option.addEventListener('click', (e) => {
                 e.preventDefault();
                 setLanguage(e.currentTarget.dataset.lang);
-                $('#langMenu').classList.add('hidden');
+                $('#langMenu')?.classList.add('hidden');
             }));
 
             // --- Listeners de Modais ---
-            $('#themeSelectorBtn').addEventListener('click', () => $('#themeModal').classList.remove('hidden'));
-            $('#closeThemeModalBtn').addEventListener('click', () => $('#themeModal').classList.add('hidden'));
-            $('#themeModal .modal-backdrop').addEventListener('click', () => $('#themeModal').classList.add('hidden'));
+            $('#themeSelectorBtn')?.addEventListener('click', () => $('#themeModal')?.classList.remove('hidden'));
+            $('#closeThemeModalBtn')?.addEventListener('click', () => $('#themeModal')?.classList.add('hidden'));
+            $('#themeModal .modal-backdrop')?.addEventListener('click', () => $('#themeModal')?.classList.add('hidden'));
             
-            $('#closeAddonsModalBtn').addEventListener('click', () => $('#addonsModal').classList.add('hidden'));
-            $('#addonsModal .modal-backdrop').addEventListener('click', () => $('#addonsModal').classList.add('hidden'));
+            $('#closeAddonsModalBtn')?.addEventListener('click', () => $('#addonsModal')?.classList.add('hidden'));
+            $('#addonsModal .modal-backdrop')?.addEventListener('click', () => $('#addonsModal')?.classList.add('hidden'));
             
             document.body.addEventListener('click', (e) => {
                 const addonsBtn = e.target.closest('.open-addons-btn');
