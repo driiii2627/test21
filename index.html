@@ -207,7 +207,6 @@
                     <!-- Seção de Jogos em Destaque -->
                     <section>
                         <h2 class="text-3xl font-bold mb-6 section-title" data-translate-key="featured_games_title">Jogos em Destaque</h2>
-                        <!-- MODIFICATION: Updated grid classes for better responsiveness -->
                         <div id="featured-games-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
                             <!-- Cards de Destaque serão injetados aqui -->
                         </div>
@@ -216,7 +215,6 @@
                     <!-- Seção de Todos os Jogos -->
                     <section class="mt-16">
                         <h2 class="text-3xl font-bold mb-6 section-title" data-translate-key="all_games_title">Todos os Jogos</h2>
-                        <!-- MODIFICATION: Updated grid classes for better responsiveness -->
                         <div id="all-games-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5">
                             <!-- Cards de Todos os Jogos serão injetados aqui -->
                         </div>
@@ -371,9 +369,6 @@
         
         // --- FUNÇÕES ---
         
-        // ===================================================================================
-        // --- MODIFICATION: REBUILT GAME CARD CREATION FUNCTION FOR RESPONSIVENESS ---
-        // ===================================================================================
         const createGameCardHTML = (game) => {
             const currentLang = localStorage.getItem('language') || 'pt';
             const categoriesHTML = game.categories.map(category => {
@@ -396,7 +391,8 @@
                     <div class="p-3 sm:p-4 flex-grow flex flex-col">
                         <div class="flex-grow mb-2">
                             <h3 class="font-bold text-base mb-2 truncate">${game.title}</h3>
-                            <div class="flex flex-wrap gap-1.5">${categoriesHTML}</div>
+                            <!-- MODIFICATION: Added min-height to standardize category area height -->
+                            <div class="flex flex-wrap items-start gap-1.5 min-h-[2.5rem]">${categoriesHTML}</div>
                         </div>
                         <div class="flex items-center space-x-2">
                             <a href="#" class="w-full flex-grow bg-slate-500/20 dark:bg-slate-800/30 hover:bg-slate-500/40 dark:hover:bg-slate-800/60 text-center py-2 px-3 rounded-lg font-semibold flex items-center justify-center space-x-2 transition-colors text-sm">
