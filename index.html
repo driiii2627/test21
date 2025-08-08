@@ -411,6 +411,7 @@
                 if (game.featured) {
                     featuredHTML += cardHTML;
                 }
+                // Controla a visibilidade inicial dos jogos na secção "Todos os Jogos"
                 const isVisibleInitially = index < 4;
                 const cardWrapper = `<div class="game-wrapper ${isVisibleInitially ? '' : 'hidden'}">${cardHTML}</div>`;
                 allGamesHTML += cardWrapper;
@@ -458,8 +459,7 @@
             const searchTerm = searchInput.value.toLowerCase();
             const activeCategory = document.querySelector('.category-filter.active')?.dataset.category;
             let visibleGames = 0;
-            document.querySelectorAll('.game-wrapper').forEach(wrapper => {
-                const card = wrapper.querySelector('.game-card');
+            document.querySelectorAll('.game-card').forEach(card => {
                 const title = card.querySelector('h3').textContent.toLowerCase();
                 const categories = card.dataset.categories.split(',');
                 const gameData = gamesData.find(g => g.title === card.querySelector('h3').textContent);
@@ -471,7 +471,7 @@
                 const searchMatch = title.includes(searchTerm) || addonsMatch;
                 const categoryMatch = !activeCategory || activeCategory === 'Todos' || categories.includes(activeCategory);
                 const isVisible = searchMatch && categoryMatch;
-                wrapper.style.display = isVisible ? 'block' : 'none';
+                card.parentElement.style.display = isVisible ? 'block' : 'none';
                 if(isVisible) visibleGames++;
             });
             const isFiltering = searchTerm.length > 0 || (activeCategory && activeCategory !== 'Todos');
