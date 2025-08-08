@@ -284,7 +284,7 @@
             {
                 id: 1,
                 title: "Minecraft",
-                image: "https://placehold.co/300x400/065f46/ffffff?text=Minecraft",
+                image: "https://placehold.co/300x300/065f46/ffffff?text=Minecraft",
                 categories: ["Sandbox", "Sobrevivência"],
                 featured: true,
                 hasAddons: true,
@@ -307,7 +307,7 @@
             {
                 id: 2,
                 title: "Terraria",
-                image: "https://placehold.co/300x400/581c87/ffffff?text=Terraria",
+                image: "https://placehold.co/300x300/581c87/ffffff?text=Terraria",
                 categories: ["Sandbox", "Aventura"],
                 featured: true,
                 hasAddons: false,
@@ -358,9 +358,6 @@
         
         // --- FUNÇÕES ---
         
-        // ===================================================================================
-        // --- MODIFICATION: REBUILT GAME CARD HTML FROM SCRATCH BASED ON USER IMAGE ---
-        // ===================================================================================
         const createGameCardHTML = (game) => {
             const currentLang = localStorage.getItem('language') || 'pt';
             const categoriesHTML = game.categories.map(category => {
@@ -376,12 +373,12 @@
             return `
                 <div class="glass-card rounded-2xl game-card flex flex-col overflow-hidden h-full">
                     <div class="relative">
-                        <img src="${game.image}" alt="${game.title}" class="w-full aspect-[3/4] object-cover" onerror="this.onerror=null;this.src='https://placehold.co/300x400/0D1117/E2E8F0?text=Image+Not+Found';">
+                        <img src="${game.image}" alt="${game.title}" class="w-full aspect-square object-cover" onerror="this.onerror=null;this.src='https://placehold.co/300x300/0D1117/E2E8F0?text=Image+Not+Found';">
                     </div>
                     <div class="p-4 flex flex-col flex-grow bg-slate-900/50">
                         <div class="flex-grow">
                             <h3 class="font-bold text-lg mb-2 text-primary truncate">${game.title}</h3>
-                            <div class="flex flex-wrap gap-2 mb-4">
+                            <div class="flex flex-wrap items-start gap-2 mb-4 min-h-[56px]">
                                 ${categoriesHTML}
                             </div>
                         </div>
