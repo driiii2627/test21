@@ -66,7 +66,7 @@ const gamesData = [
         id: 3, 
         title: "Terraria", 
         image: "https://placehold.co/400x300/581c87/ffffff?text=Terraria", 
-        categories: ["Sandbox", "teste"], 
+        categories: ["Sandbox", "teste2"], 
         featured: true, 
         hasAddons: false 
     },
