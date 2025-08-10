@@ -1,6 +1,3 @@
-// ===================================================================================
-// --- CONFIGURAÇÕES GLOBAIS ---
-// ===================================================================================
 const themes = [
     { id: 'gamer-dark', name: 'Gamer Dark', type: 'dark' },
     { id: 'gamer-light', name: 'Gamer Light', type: 'light' },
@@ -8,35 +5,10 @@ const themes = [
     { id: 'minty-light', name: 'Minty Fresh', type: 'light' },
 ];
 
-// ===================================================================================
-// --- DADOS DOS JOGOS (Onde a Mágica Acontece!) ---
-// ===================================================================================
-// Para adicionar um novo jogo, basta copiar um dos blocos abaixo (de { até }),
-// colar no final da lista (antes do `];`), e alterar as informações.
-// O ID deve ser único para cada jogo.
-// O site irá criar o card e os filtros de categoria automaticamente.
-//
-// Modelo para copiar:
-// {
-//     id: 3, // <-- Mude o número para um novo ID único
-//     title: "Nome do Jogo",
-//     image: "https://link.da.imagem.com/imagem.png",
-//     categories: ["Categoria1", "Categoria2"], // <-- Adicione as categorias aqui
-//     featured: false, // <-- 'true' para aparecer em "Destaques", 'false' para não
-//     hasAddons: false, // <-- 'true' se tiver add-ons, 'false' se não
-//     addons: [ // <-- Se hasAddons for 'false', pode apagar esta linha e as seguintes até ']'
-//         { 
-//             categoryKey: "texturas", // Chave para tradução (ex: texturas, shaders)
-//             icon: "paintbrush", // Ícone do https://lucide.dev/
-//             files: [{ name: "Nome do Add-on 1" }, { name: "Nome do Add-on 2" }] 
-//         }
-//     ]
-// },
-
 const gamesData = [
     { 
         id: 1, 
-        title: "Minecraft2", 
+        title: "Minecraft", 
         image: "https://placehold.co/400x300/065f46/ffffff?text=Minecraft", 
         categories: ["Sandbox", "Sobrevivência", "Aventura", "Mundo Aberto"], 
         featured: true, 
@@ -62,14 +34,6 @@ const gamesData = [
         featured: true, 
         hasAddons: false 
     },
- { 
-        id: 3, 
-        title: "Terraria", 
-        image: "https://placehold.co/400x300/581c87/ffffff?text=Terraria", 
-        categories: ["Sandbox", "teste2"], 
-        featured: true, 
-        hasAddons: false 
-    },
 ];
 
 const translations = {
@@ -82,16 +46,9 @@ const translations = {
     ja: { theme_modal_title: "テーマを選択", nav_games: "ゲーム", nav_apks: "APK", nav_announcements: "お知らせ", nav_games_mobile: "ゲーム", nav_apks_mobile: "APK", nav_announcements_mobile: "お知らせ", search_placeholder: "検索...", hero_title: "あなたの冒険はダウンロードから始まる", hero_subtitle: "最高のゲームとAPKへの直接アクセス。高速、安全、そしてコミュニティ厳選。", featured_games_title: "おすすめゲーム", all_games_title: "すべてのゲーム", search_results_title: "検索結果", genre_sandbox: "サンドボックス", genre_aventura: "アドベンチャー", genre_sobrevivência: "サバイバル", "genre_mundo_aberto": "オープンワールド", no_results_title: "ゲームが見つかりません", no_results_subtitle: "他のキーワードで検索してみてください。", coming_soon_title: "近日公開", coming_soon_subtitle: "このセクションは現在作業中です！", "404_button": "ベースに戻る", download_button: "ダウンロード", category_all: "すべて", addon_modal_title: "アドオン", view_all_button: "すべて表示", theme_name_matrix: "マトリックス", announcements_title: "お知らせ", announcement_testing: "このサイトはテスト段階です。新しい機能やゲームが常に追加されています。ご覧いただきありがとうございます！", addon_category_texturas: "テクスチャ", addon_category_shaders: "シェーダー", footer_copyright: "© 2025 GameShare. 全著作権所有。", nav_terms: "規約", terms_title: "利用規約", terms_p1: "GameShareは、インターネット上で公開されているゲームやアプリケーション（APK）へのリンクのアグリゲーターおよびインデクサーとして機能します。サーバーにファイルをホストすることはありません。", terms_p2: "このサイトに表示されるすべてのダウンロードリンクは、サードパーティのWebサイトにリダイレクトされます。GameShareは、これらの外部サイトのコンテンツを管理しておらず、そのセキュリティ、合法性、または正確性について一切の責任を負いません。", terms_p3: "ユーザーは、リンクの使用およびファイルのダウンロードについて全責任を負います。ウイルス対策ソフトウェアを使用し、ダウンロードしたすべてのファイルを確認することをお勧めします。GameShareは、お使いのデバイスに発生する可能性のあるいかなる損害についても責任を負いません。", terms_p4: "私たちのチームはリンクの整合性を確認するよう努めていますが、すべてのリンクが常に機能している、または悪意のあるソフトウェアがないことを保証することはできません。壊れたリンクや不審なリンクを見つけた場合は、コンテンツを確認できるよう、ご連絡ください。" },
 };
 
-// ===================================================================================
-// --- SELETORES DE ELEMENTOS ---
-// ===================================================================================
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => document.querySelectorAll(selector);
 const htmlElement = document.documentElement;
-
-// ===================================================================================
-// --- FUNÇÕES PRINCIPAIS ---
-// ===================================================================================
 
 const createGameCardHTML = (game) => {
     const currentLang = localStorage.getItem('language') || 'pt';
@@ -165,7 +122,6 @@ const setLanguage = (lang) => {
         const key = el.dataset.translateKey;
         const translation = langTranslations[key];
         if(translation === undefined) {
-            // Fallback for dynamic content like nav links with icons
             const span = el.querySelector('span');
             if(span) {
                 const originalKey = Object.keys(translations.en).find(k => translations.en[k] === span.textContent);
@@ -187,7 +143,7 @@ const setLanguage = (lang) => {
     });
     generateCategoryFilters();
     renderGames();
-    generateThemePreviews(); // Re-generate previews for language change
+    generateThemePreviews();
 };
 
 const setTheme = (themeId) => {
@@ -232,7 +188,6 @@ const generateThemePreviews = () => {
     lucide.createIcons();
 };
 
-// --- Funções de UI e Animações ---
 const showPage = (pageId) => {
     const pages = [$('#page-home'), $('#page-404'), $('#page-announcements'), $('#page-terms')];
     pages.forEach(page => {
@@ -408,16 +363,13 @@ const openAddonsModal = (gameId) => {
     addonsModal.classList.remove('hidden');
 };
 
-// ===================================================================================
-// --- ROTEADOR E INICIALIZAÇÃO ---
-// ===================================================================================
 const router = () => {
     const path = window.location.hash.slice(1) || 'home';
     const routes = {
         'home': 'home',
         'announcements': 'announcements',
         'terms': 'terms',
-        'apks': '404' // Rota para a página "Em Breve"
+        'apks': '404'
     };
     const pageId = routes[path] || '404';
     showPage(pageId);
@@ -430,9 +382,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setLanguage(savedLang);
     generateThemePreviews();
     setTheme(savedTheme);
-    router(); // Roda o roteador na carga inicial
+    router();
 
-    // --- Listeners Gerais ---
     $('#searchBtn')?.addEventListener('click', () => { $('#searchInput')?.classList.toggle('active'); $('#searchInput')?.focus(); });
     $('#searchInput')?.addEventListener('input', updateFilters);
     $('#view-all-btn')?.addEventListener('click', () => {
@@ -440,17 +391,17 @@ document.addEventListener('DOMContentLoaded', () => {
         $('#view-all-container')?.classList.add('hidden');
     });
 
-    // --- Listeners de Navegação e Menus ---
     window.addEventListener('hashchange', router);
     $('#mobileMenuBtn')?.addEventListener('click', () => $('#mobileMenu')?.classList.toggle('hidden'));
     $('#langBtn')?.addEventListener('click', () => $('#langMenu')?.classList.toggle('hidden'));
-    $$('.lang-option').forEach(option => option.addEventListener('click', (e) => {
-        e.preventDefault();
-        setLanguage(e.currentTarget.dataset.lang);
-        $('#langMenu')?.classList.add('hidden');
-    }));
+    $$('.lang-option').forEach(option => {
+        option.addEventListener('click', (e) => {
+            e.preventDefault();
+            setLanguage(e.currentTarget.dataset.lang);
+            $('#langMenu')?.classList.add('hidden');
+        });
+    });
 
-    // --- Listeners de Modais ---
     $('#themeSelectorBtn')?.addEventListener('click', () => $('#themeModal')?.classList.remove('hidden'));
     $('#closeThemeModalBtn')?.addEventListener('click', () => $('#themeModal')?.classList.add('hidden'));
     $('#themeModal .modal-backdrop')?.addEventListener('click', () => $('#themeModal')?.classList.add('hidden'));
