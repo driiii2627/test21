@@ -81,7 +81,11 @@
                     <p class="mt-4 text-lg text-slate-300 max-w-2xl mx-auto hero-animated-text p" data-translate-key="hero_subtitle">Acesso direto aos melhores jogos e APKs. Rápido, seguro e selecionado pela comunidade.</p>
                 </section>
                 <section class="mt-12 relative">
-                    <div id="category-filter-bar" class="flex items-center gap-3 overflow-x-auto whitespace-nowrap py-2 scroll-smooth"></div>
+                    <div class="relative group">
+                        <button id="scroll-left" class="scroll-btn left-0 hidden sm:flex"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+                        <div id="category-filter-bar" class="flex items-center gap-3 overflow-x-auto whitespace-nowrap py-2 scroll-smooth"></div>
+                        <button id="scroll-right" class="scroll-btn right-0 hidden sm:flex"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
+                    </div>
                 </section>
                 <div class="mt-8">
                     <section>
@@ -174,6 +178,11 @@
                 </div>
             </div>
         </footer>
+    </div>
+
+    <div id="notification-toast" class="hidden fixed bottom-5 right-5 glass-effect p-4 rounded-lg shadow-lg flex items-center space-x-3">
+        <i data-lucide="info" class="w-5 h-5 text-muted"></i>
+        <span class="text-sm" data-translate-key="beta_notification">Este site está em fase de testes.</span>
     </div>
 
     <script src="script.js?v=1.1"></script>
