@@ -62,19 +62,14 @@ const gamesData = [
         featured: true, 
         hasAddons: false 
     },
-    { 
+ { 
         id: 3, 
-        title: "Minecraft3", 
-        image: "https://placehold.co/400x300/065f46/ffffff?text=Minecraft", 
-        categories: ["Sandbox", "Sobrevivência", "Aventura", "Mundo fechado"], 
+        title: "Terraria", 
+        image: "https://placehold.co/400x300/581c87/ffffff?text=Terraria", 
+        categories: ["Sandbox", "teste"], 
         featured: true, 
-        hasAddons: true, 
-        addons: [
-            { 
-                categoryKey: "texturas", 
-                icon: "paintbrush", 
-                files: [{ name: "Faithful 32x" }, { name: "Bare Bones" }] 
-            }, 
+        hasAddons: false 
+    },
 ];
 
 const translations = {
