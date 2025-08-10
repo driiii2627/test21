@@ -182,3 +182,58 @@ html:not([data-theme='gamer-dark']):not([data-theme='matrix-dark']) .hero-backgr
 .hero-animated-text.p {
     animation-delay: 0.4s;
 }
+
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background-color: rgba(0,0,0,0.3);
+    color: white;
+    border-radius: 9999px;
+    padding: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.group:hover .scroll-btn {
+    opacity: 1;
+}
+
+.scroll-btn.left-0 { left: -1rem; }
+.scroll-btn.right-0 { right: -1rem; }
+
+@keyframes slideIn {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+#notification-toast {
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+}
+
+#notification-toast.show {
+    animation-name: slideIn;
+}
+
+#notification-toast.hide {
+    animation-name: slideOut;
+}
