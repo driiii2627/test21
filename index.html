@@ -40,7 +40,6 @@
                         <span id="current-lang-display" class="hidden sm:inline text-sm"></span>
                     </button>
                     <div id="langMenu" class="hidden absolute right-0 mt-2 w-48 glass-effect rounded-lg shadow-lg py-1 z-50">
-                        <!-- Opções de idioma serão injetadas aqui pelo JS -->
                     </div>
                 </div>
                 <button id="themeSelectorBtn" class="header-button p-2 rounded-full">
@@ -139,6 +138,20 @@
                 </div>
             </div>
         </div>
+        <div id="page-privacy" class="page-container hidden py-12">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl font-bold mb-8 text-center" data-translate-key="privacy_title">Política de Privacidade</h1>
+                <div class="glass-effect rounded-2xl p-8 space-y-4 text-muted">
+                    <p data-translate-key="privacy_p1">A sua privacidade é importante para nós. Esta política de privacidade explica quais dados pessoais o GameShare coleta de você e como os usamos.</p>
+                    <p data-translate-key="privacy_p2"><strong>Dados que Coletamos:</strong> O GameShare utiliza o armazenamento local (localStorage) do seu navegador para salvar as suas preferências, como o tema visual (claro/escuro) e o idioma selecionado. Não coletamos informações de identificação pessoal como nome, e-mail ou endereço IP.</p>
+                    <p data-translate-key="privacy_p3"><strong>Como Usamos os Dados:</strong> Os dados salvos localmente são usados exclusivamente para melhorar a sua experiência de navegação no site, garantindo que as suas preferências sejam mantidas entre as visitas. Estes dados não são partilhados com terceiros.</p>
+                    <p data-translate-key="privacy_p4"><strong>Cookies:</strong> Se você consentir, poderemos usar cookies anónimos para fins de análise, para entendermos como os utilizadores interagem com o site e como podemos melhorá-lo. Este consentimento é opcional.</p>
+                </div>
+                <div class="text-center mt-8">
+                    <a href="#home" class="btn-gradient text-white px-8 py-3 rounded-lg font-bold text-lg inline-block" data-translate-key="404_button">Voltar para a Base</a>
+                </div>
+            </div>
+        </div>
     
         <div id="addonsModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
             <div class="modal-backdrop fixed inset-0"></div>
@@ -174,6 +187,7 @@
                 <div class="flex items-center space-x-4">
                     <p class="text-sm text-muted" data-translate-key="footer_copyright">© 2025 GameShare. Todos os direitos reservados.</p>
                     <a href="#terms" class="text-sm text-muted hover:text-primary transition-colors" data-translate-key="nav_terms">Termos</a>
+                    <a href="#privacy" class="text-sm text-muted hover:text-primary transition-colors" data-translate-key="nav_privacy">Privacidade</a>
                 </div>
                 <div class="flex items-center space-x-4 mt-4 sm:mt-0">
                     <a href="#" aria-label="Discord" class="text-muted hover:text-primary transition-colors">
@@ -187,6 +201,28 @@
     <div id="notification-toast" class="hidden fixed bottom-5 right-5 glass-effect p-4 rounded-lg shadow-lg flex items-center space-x-3 z-50">
         <i data-lucide="info" class="w-5 h-5 text-muted"></i>
         <span class="text-sm" data-translate-key="beta_notification">Este site está em fase de testes.</span>
+    </div>
+
+    <div id="consent-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="modal-backdrop fixed inset-0"></div>
+        <div class="glass-card rounded-2xl w-full max-w-md mx-auto z-10 flex flex-col">
+            <div class="p-6 text-center">
+                <i data-lucide="cookie" class="w-12 h-12 mx-auto text-muted"></i>
+                <h2 class="text-2xl font-bold mt-4" data-translate-key="consent_title">Sua Privacidade</h2>
+                <p class="text-muted mt-2" data-translate-key="consent_text">
+                    Usamos o armazenamento local para salvar as suas preferências. Ao continuar, você concorda com nossos 
+                    <a href="#terms" class="text-primary underline">Termos de Serviço</a> e 
+                    <a href="#privacy" class="text-primary underline">Política de Privacidade</a>.
+                </p>
+            </div>
+            <div class="p-6 border-t border-[var(--border-color)] space-y-4">
+                 <label class="flex items-center">
+                    <input type="checkbox" id="analytics-consent" class="h-4 w-4 rounded border-gray-300 text-[var(--accent-violet)] focus:ring-[var(--accent-violet)]" checked>
+                    <span class="ml-2 text-sm text-muted" data-translate-key="consent_analytics">Permitir cookies para análise (opcional)</span>
+                </label>
+                <button id="accept-consent-btn" class="w-full btn-gradient text-white font-bold py-2 px-4 rounded-md" data-translate-key="consent_accept">Aceitar e Continuar</button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js?v=1.1"></script>
