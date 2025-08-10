@@ -260,3 +260,17 @@ html:not([data-theme='gamer-dark']):not([data-theme='matrix-dark']) .hero-backgr
     align-items: center;
     margin-top: 2rem;
 }
+
+.apk-card-image {
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.apk-card-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 0.75rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%);
+}
