@@ -113,13 +113,22 @@
             <p class="text-xl text-muted mt-4" data-translate-key="coming_soon_subtitle">Estamos trabalhando nesta seção!</p>
             <a href="#home" class="mt-8 btn-gradient text-white px-8 py-3 rounded-lg font-bold text-lg inline-block" data-translate-key="404_button">Voltar para a Base</a>
         </div>
-        <div id="page-announcements" class="page-container hidden text-center py-20">
-            <i data-lucide="megaphone" class="w-24 h-24 mx-auto text-muted"></i>
-            <h1 class="text-4xl font-bold mt-8" data-translate-key="announcements_title">Anúncios</h1>
-            <div class="glass-effect rounded-2xl p-8 max-w-4xl mx-auto mt-8">
-                <p class="text-lg text-muted" data-translate-key="announcement_testing">Este site está em fase de testes. Novas funcionalidades e jogos são adicionados constantemente. Agradecemos a sua visita!</p>
+        <div id="page-announcements" class="page-container hidden py-12">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl font-bold mb-8 text-center" data-translate-key="announcements_title">Anúncios</h1>
+                <div class="space-y-6">
+                    <div class="announcement-card">
+                        <p class="text-sm text-muted mb-2" data-translate-key="announcement_date_1">10 de Agosto de 2025</p>
+                        <h2 class="text-2xl font-bold mb-3 text-primary" data-translate-key="announcement_title_1">Bem-vindo à Fase Beta!</h2>
+                        <p class="text-muted" data-translate-key="announcement_content_1">
+                            Este site está em fase de testes. Novas funcionalidades e jogos são adicionados constantemente. Agradecemos a sua visita e feedback!
+                        </p>
+                    </div>
+                </div>
+                 <div class="text-center mt-8">
+                    <a href="#home" class="btn-gradient text-white px-8 py-3 rounded-lg font-bold text-lg inline-block" data-translate-key="404_button">Voltar para a Base</a>
+                </div>
             </div>
-            <a href="#home" class="mt-8 btn-gradient text-white px-8 py-3 rounded-lg font-bold text-lg inline-block" data-translate-key="404_button">Voltar para a Base</a>
         </div>
         <div id="page-terms" class="page-container hidden py-12">
             <div class="max-w-4xl mx-auto">
@@ -180,7 +189,7 @@
         </footer>
     </div>
 
-    <div id="notification-toast" class="hidden fixed bottom-5 right-5 glass-effect p-4 rounded-lg shadow-lg flex items-center space-x-3">
+    <div id="notification-toast" class="hidden fixed bottom-5 right-5 glass-effect p-4 rounded-lg shadow-lg flex items-center space-x-3 z-50">
         <i data-lucide="info" class="w-5 h-5 text-muted"></i>
         <span class="text-sm" data-translate-key="beta_notification">Este site está em fase de testes.</span>
     </div>
