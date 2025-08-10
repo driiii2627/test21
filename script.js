@@ -83,17 +83,17 @@ const createGameCardHTML = (game) => {
     }).join('');
 
     const downloadButtonHTML = game.useShorteners && Object.keys(game.downloadLinks).length > 0
-        ? `<button class="card-action-btn open-download-modal-btn" title="Download" data-game-id="${game.id}">
-              <i data-lucide="download" class="w-5 h-5"></i>
+        ? `<button class="w-full flex-grow card-button text-center py-2 px-3 rounded-lg font-semibold flex items-center justify-center space-x-2 text-sm open-download-modal-btn" data-game-id="${game.id}">
+              <i data-lucide="download" class="w-4 h-4"></i>
+              <span data-translate-key="download_button">${translations[currentLang]?.download_button || 'Baixar'}</span>
           </button>`
-        : `<a href="${game.defaultLink || '#'}" class="card-action-btn" title="Download">
-              <i data-lucide="download" class="w-5 h-5"></i>
+        : `<a href="${game.defaultLink || '#'}" class="w-full flex-grow card-button text-center py-2 px-3 rounded-lg font-semibold flex items-center justify-center space-x-2 text-sm">
+              <i data-lucide="download" class="w-4 h-4"></i>
+              <span data-translate-key="download_button">${translations[currentLang]?.download_button || 'Baixar'}</span>
           </a>`;
 
     const addonsButtonHTML = game.hasAddons 
-        ? `<button class="card-action-btn open-addons-btn" title="Add-ons" data-game-id="${game.id}">
-              <i data-lucide="box" class="w-5 h-5"></i>
-          </button>` 
+        ? `<button class="card-button p-2 rounded-lg flex-shrink-0 open-addons-btn" data-game-id="${game.id}"><i data-lucide="box" class="w-5 h-5 text-muted"></i></button>` 
         : '';
     
     const infoButtonHTML = game.hasInfo
@@ -106,9 +106,7 @@ const createGameCardHTML = (game) => {
         <div class="glass-card rounded-2xl game-card flex flex-col overflow-hidden h-full group">
             <div class="relative">
                 <img src="${game.image}" alt="${game.title}" class="w-full aspect-[4/3] object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x300/0D1117/E2E8F0?text=Image+Not+Found';">
-                <div class="absolute top-2 right-2 z-10 flex flex-col space-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    ${downloadButtonHTML}
-                    ${addonsButtonHTML}
+                <div class="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     ${infoButtonHTML}
                 </div>
             </div>
@@ -120,6 +118,10 @@ const createGameCardHTML = (game) => {
                             ${categoriesHTML}
                         </div>
                     </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    ${downloadButtonHTML}
+                    ${addonsButtonHTML}
                 </div>
             </div>
         </div>
