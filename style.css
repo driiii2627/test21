@@ -340,3 +340,9 @@ html:not([data-theme='gamer-dark']):not([data-theme='matrix-dark']) .hero-backgr
     opacity: 1;
     transform: translateY(0);
 }
+
+.creator-role {
+    font-weight: 600;
+    color: var(--accent-violet);
+    margin-top: 0.25rem;
+}
