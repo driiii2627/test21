@@ -11,7 +11,7 @@ const themes = [
 const gamesData = [
     { id: 1, title: "Minecraft", image: "https://placehold.co/400x300/065f46/ffffff?text=Minecraft", categories: ["Sandbox", "Sobrevivência", "Aventura", "Mundo Aberto"], featured: true, hasAddons: true, addons: [{ categoryKey: "texturas", icon: "paintbrush", files: [{ name: "Faithful 32x" }, { name: "Bare Bones" }] }, { categoryKey: "shaders", icon: "sun", files: [{ name: "BSL Shaders" }] }] },
     { id: 2, title: "Terraria", image: "https://placehold.co/400x300/581c87/ffffff?text=Terraria", categories: ["Sandbox", "Aventura"], featured: true, hasAddons: false },
-     { id: 3, title: "Lego", image: "https://placehold.co/400x300/581c87/ffffff?text=lego", categories: ["Sandbox", "teste1"], featured: true, hasAddons: false },
+      { id: 3, title: "Terraria3", image: "https://placehold.co/400x300/581c87/ffffff?text=Terraria", categories: ["Sandbox", "Aventura"], featured: true, hasAddons: false },
 ];
 
 const translations = {
