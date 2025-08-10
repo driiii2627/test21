@@ -192,6 +192,20 @@
             </div>
         </div>
 
+        <div id="downloadModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div class="modal-backdrop fixed inset-0"></div>
+            <div class="glass-card rounded-2xl w-full max-w-md mx-auto z-10 flex flex-col">
+                <div class="p-4 border-b border-border-color flex justify-between items-center flex-shrink-0">
+                    <h2 id="downloadModalTitle" class="text-2xl font-bold">Opções de Download</h2>
+                    <button id="closeDownloadModalBtn" class="header-button p-2 rounded-full">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+                <div id="downloadLinksContainer" class="p-6 space-y-3">
+                </div>
+            </div>
+        </div>
+
         <footer class="mt-16 border-t" style="border-color: var(--border-color);">
             <div class="mx-auto max-w-7xl px-6 py-8 flex flex-col sm:flex-row items-center justify-between">
                 <div class="flex items-center space-x-4">
