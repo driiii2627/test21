@@ -292,3 +292,18 @@ html:not([data-theme='gamer-dark']):not([data-theme='matrix-dark']) .hero-backgr
     background-color: var(--button-hover-bg);
     transform: scale(1.02);
 }
+
+.card-action-btn {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 9999px;
+    padding: 0.5rem;
+    color: white;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.card-action-btn:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    transform: scale(1.1);
+}
