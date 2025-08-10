@@ -250,3 +250,13 @@ html:not([data-theme='gamer-dark']):not([data-theme='matrix-dark']) .hero-backgr
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
+
+.wip-banner {
+    background: var(--card-background);
+    border-left: 4px solid var(--accent-blue);
+    padding: 1rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+}
