@@ -8,13 +8,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Adicionado '?v=1.1' para forçar a atualização do cache do navegador -->
     <link rel="stylesheet" href="style.css?v=1.1">
 </head>
 <body class="transition-colors duration-300">
 
     <div id="app" class="w-full px-4 sm:px-6 lg:px-8">
-        <!-- Cabeçalho -->
         <header class="glass-effect sticky top-4 z-40 flex justify-between items-center py-3 px-6 rounded-2xl mt-4">
             <div class="flex-shrink-0">
                 <a href="#home" id="homeLink" class="flex items-center space-x-2 cursor-pointer">
@@ -59,7 +57,6 @@
             </div>
         </header>
         
-        <!-- Menu Mobile -->
         <div id="mobileMenu" class="hidden md:hidden mt-2">
             <div class="glass-effect rounded-2xl p-2 space-y-1">
                 <a href="#home" class="nav-link flex items-center w-full p-3 rounded-lg text-base font-semibold transition-colors hover:bg-[var(--button-hover-bg)]" data-translate-key="nav_games_mobile">
@@ -77,7 +74,6 @@
             </div>
         </div>
 
-        <!-- Conteúdo Principal -->
         <div id="page-home" class="page-container">
             <main class="mt-8">
                 <section class="hero-background rounded-2xl shadow-2xl p-8 md:p-16 text-center overflow-hidden">
@@ -136,7 +132,6 @@
             </div>
         </div>
     
-        <!-- Modal de Add-ons -->
         <div id="addonsModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
             <div class="modal-backdrop fixed inset-0"></div>
             <div class="glass-card rounded-2xl w-full max-w-4xl max-h-[90vh] mx-auto z-10 flex flex-col">
@@ -150,7 +145,6 @@
             </div>
         </div>
 
-        <!-- Modal de Temas -->
         <div id="themeModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
             <div class="modal-backdrop fixed inset-0"></div>
             <div class="glass-card rounded-2xl w-full max-w-md mx-auto z-10 flex flex-col">
@@ -162,7 +156,6 @@
                 </div>
                 <div class="p-6">
                     <div id="themeGrid" class="grid grid-cols-2 gap-4">
-                        <!-- Previews dos temas serão injetadas aqui -->
                     </div>
                 </div>
             </div>
@@ -174,7 +167,6 @@
                     <p class="text-sm text-muted" data-translate-key="footer_copyright">© 2025 GameShare. Todos os direitos reservados.</p>
                     <a href="#terms" class="text-sm text-muted hover:text-primary transition-colors" data-translate-key="nav_terms">Termos</a>
                 </div>
-                <!-- Managed by Got'y -->
                 <div class="flex items-center space-x-4 mt-4 sm:mt-0">
                     <a href="#" aria-label="Discord" class="text-muted hover:text-primary transition-colors">
                         <img src="https://i.ibb.co/xSK265Yz/discord-logo-discord-logo-transparent-discord-icon-transparent-free-free-png.webp" alt="Discord Logo" class="w-6 h-6">
@@ -184,7 +176,6 @@
         </footer>
     </div>
 
-    <!-- Adicionado '?v=1.1' para forçar a atualização do cache do navegador -->
     <script src="script.js?v=1.1"></script>
 </body>
 </html>
