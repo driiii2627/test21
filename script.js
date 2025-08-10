@@ -98,7 +98,7 @@ const createGameCardHTML = (game) => {
 
 const createApkCardHTML = (apk) => {
     return `
-        <div class="glass-card apk-card-image rounded-2xl flex flex-col justify-end p-4 h-48" style="background-image: url('${apk.image}')">
+        <div class="glass-card apk-card-image rounded-2xl flex flex-col justify-end p-4 h-48 overflow-hidden" style="background-image: url('${apk.image}')">
             <div class="relative z-10">
                  <h3 class="font-bold text-lg text-white">${apk.title}</h3>
                  <p class="text-sm text-slate-300">Version ${apk.version} | Updated: ${apk.updated}</p>
@@ -477,6 +477,22 @@ const generateLangMenu = () => {
     });
 };
 
+const handleConsent = () => {
+    const consentModal = $('#consent-modal');
+    if (!consentModal) return;
+
+    if (!localStorage.getItem('consentGiven')) {
+        consentModal.classList.remove('hidden');
+    }
+
+    $('#accept-consent-btn')?.addEventListener('click', () => {
+        localStorage.setItem('consentGiven', 'true');
+        const analyticsAllowed = $('#analytics-consent').checked;
+        localStorage.setItem('analyticsConsent', analyticsAllowed);
+        consentModal.classList.add('hidden');
+    });
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('selectedTheme') || 'gamer-dark';
     const savedLang = localStorage.getItem('language') || 'pt';
@@ -488,6 +504,7 @@ document.addEventListener('DOMContentLoaded', () => {
     router();
     setupCategoryScroller();
     handleBetaNotification();
+    handleConsent();
     renderApks();
 
     $('#searchBtn')?.addEventListener('click', () => { $('#searchInput')?.classList.toggle('active'); $('#searchInput')?.focus(); });
