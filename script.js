@@ -36,9 +36,16 @@ const gamesData = [
     },
 ];
 
+const languages = {
+    pt: { name: "Português", flag: "https://flagcdn.com/w20/br.png" },
+    en: { name: "English", flag: "https://flagcdn.com/w20/us.png" },
+    es: { name: "Español", flag: "https://flagcdn.com/w20/es.png" },
+};
+
 const translations = {
     en: { theme_modal_title: "Select Theme", nav_games: "Games", nav_apks: "APKs", nav_announcements: "Announcements", nav_games_mobile: "Games", nav_apks_mobile: "APKs", nav_announcements_mobile: "Announcements", search_placeholder: "Search...", hero_title: "Your Adventure Starts with a Download", hero_subtitle: "Direct access to the best games and APKs. Fast, secure, and community-curated.", featured_games_title: "Featured Games", all_games_title: "All Games", search_results_title: "Search Results", genre_sandbox: "Sandbox", genre_aventura: "Adventure", genre_sobrevivência: "Survival", "genre_mundo_aberto": "Open World", no_results_title: "No games found", no_results_subtitle: "Try searching with other terms.", coming_soon_title: "Coming Soon", coming_soon_subtitle: "We are working on this section!", "404_button": "Back to Base", download_button: "Download", category_all: "All", addon_modal_title: "Add-ons for", view_all_button: "View All", theme_name_matrix: "Matrix", announcements_title: "Announcements", announcement_testing: "This site is in a testing phase. New features and games are constantly being added. Thank you for your visit!", addon_category_texturas: "Textures", addon_category_shaders: "Shaders", footer_copyright: "© 2025 GameShare. All rights reserved.", nav_terms: "Terms", terms_title: "Terms of Service", terms_p1: "GameShare acts as an aggregator and indexer of links to games and applications (APKs) publicly available on the internet. We do not host any files on our servers.", terms_p2: "All download links presented on this site redirect to third-party websites. GameShare has no control over the content of these external sites and assumes no responsibility for their security, legality, or accuracy.", terms_p3: "The user assumes full responsibility for the use of the links and for downloading any files. We recommend the use of antivirus software and the verification of all downloaded files. GameShare is not responsible for any damage that may occur to your device.", terms_p4: "Although our team strives to verify the integrity of the links, we cannot guarantee that all will always be functional or free of malicious software. If you find a broken or suspicious link, please contact us so we can review the content.", beta_notification: "This site is in a testing phase.", announcement_date_1: "August 10, 2025", announcement_title_1: "Welcome to the Beta Phase!", announcement_content_1: "This site is in a testing phase. New features and games are constantly being added. Thank you for your visit and feedback!" },
     pt: { theme_modal_title: "Selecionar Tema", nav_games: "Jogos", nav_apks: "APKs", nav_announcements: "Anúncios", nav_games_mobile: "Jogos", nav_apks_mobile: "APKs", nav_announcements_mobile: "Anúncios", search_placeholder: "Pesquisar...", hero_title: "Sua Aventura Começa com um Download", hero_subtitle: "Acesso direto aos melhores jogos e APKs. Rápido, seguro e selecionado pela comunidade.", featured_games_title: "Jogos em Destaque", all_games_title: "Todos os Jogos", search_results_title: "Resultados da Pesquisa", genre_sandbox: "Sandbox", genre_aventura: "Aventura", genre_sobrevivência: "Sobrevivência", "genre_mundo_aberto": "Mundo Aberto", no_results_title: "Nenhum jogo encontrado", no_results_subtitle: "Tente pesquisar com outros termos.", coming_soon_title: "Em Breve", coming_soon_subtitle: "Estamos trabalhando nesta seção!", "404_button": "Voltar para a Base", download_button: "Baixar", category_all: "Todos", addon_modal_title: "Add-ons para", view_all_button: "Ver Todos", theme_name_matrix: "Matriz", announcements_title: "Anúncios", announcement_testing: "Este site está em fase de testes. Novas funcionalidades e jogos são adicionados constantemente. Agradecemos a sua visita!", addon_category_texturas: "Texturas", addon_category_shaders: "Shaders", footer_copyright: "© 2025 GameShare. Todos os direitos reservados.", nav_terms: "Termos", terms_title: "Termos de Serviço", terms_p1: "O GameShare atua como um agregador e indexador de links para jogos e aplicativos (APKs) disponíveis publicamente na internet. Nós não hospedamos nenhum arquivo em nossos servidores.", terms_p2: "Todos os links de download apresentados neste site redirecionam para sites de terceiros. O GameShare não tem controle sobre o conteúdo desses sites externos e não assume qualquer responsabilidade pela sua segurança, legalidade ou precisão.", terms_p3: "O usuário assume total responsabilidade pelo uso dos links e pelo download de quaisquer arquivos. Recomendamos o uso de software antivírus e a verificação de todos os arquivos baixados. O GameShare não se responsabiliza por quaisquer danos que possam ocorrer em seu dispositivo.", terms_p4: "Embora nossa equipe se esforce para verificar a integridade dos links, não podemos garantir que todos estarão sempre funcionais ou livres de software malicioso. Se encontrar um link quebrado ou suspeito, por favor, contate-nos para que possamos revisar o conteúdo.", beta_notification: "Este site está em fase de testes.", announcement_date_1: "10 de Agosto de 2025", announcement_title_1: "Bem-vindo à Fase Beta!", announcement_content_1: "Este site está em fase de testes. Novas funcionalidades e jogos são adicionados constantemente. Agradecemos a sua visita e feedback!" },
+    es: { theme_modal_title: "Seleccionar Tema", nav_games: "Juegos", nav_apks: "APKs", nav_announcements: "Anuncios", nav_games_mobile: "Juegos", nav_apks_mobile: "APKs", nav_announcements_mobile: "Anuncios", search_placeholder: "Buscar...", hero_title: "Tu Aventura Comienza con una Descarga", hero_subtitle: "Acceso directo a los mejores juegos y APKs. Rápido, seguro y seleccionado por la comunidad.", featured_games_title: "Juegos Destacados", all_games_title: "Todos los Juegos", search_results_title: "Resultados de la Búsqueda", genre_sandbox: "Sandbox", genre_aventura: "Aventura", genre_sobrevivência: "Supervivencia", "genre_mundo_aberto": "Mundo Abierto", no_results_title: "No se encontraron juegos", no_results_subtitle: "Intenta buscar con otros términos.", coming_soon_title: "Próximamente", coming_soon_subtitle: "¡Estamos trabajando en esta sección!", "404_button": "Volver a la Base", download_button: "Descargar", category_all: "Todos", addon_modal_title: "Add-ons para", view_all_button: "Ver Todos", theme_name_matrix: "Matriz", announcements_title: "Anuncios", announcement_testing: "Este sitio está en fase de pruebas. Nuevas características y juegos se añaden constantemente. ¡Gracias por su visita!", addon_category_texturas: "Texturas", addon_category_shaders: "Shaders", footer_copyright: "© 2025 GameShare. Todos los derechos reservados.", nav_terms: "Términos", terms_title: "Términos de Servicio", terms_p1: "GameShare actúa como un agregador e indexador de enlaces a juegos y aplicaciones (APKs) disponibles públicamente en Internet. No alojamos ningún archivo en nuestros servidores.", terms_p2: "Todos los enlaces de descarga presentados en este sitio redirigen a sitios web de terceros. GameShare no tiene control sobre el contenido de estos sites externos y no asume ninguna responsabilidad por su seguridad, legalidad o precisión.", terms_p3: "El usuario asume toda la responsabilidad por el uso de los enlaces y la descarga de cualquier archivo. Recomendamos el uso de software antivirus y la verificación de todos los archivos descargados. GameShare no se hace responsable de los daños que puedan ocurrir en su dispositivo.", terms_p4: "Aunque nuestro equipo se esfuerza por verificar la integridad de los enlaces, no podemos garantizar que todos estarán siempre funcionales o libres de software malicioso. Si encuentra un enlace roto o sospechoso, contáctenos para que podamos revisar el contenido.", beta_notification: "Este sitio está en fase de pruebas.", announcement_date_1: "10 de Agosto de 2025", announcement_title_1: "¡Bienvenido a la Fase Beta!", announcement_content_1: "Este sitio está en fase de pruebas. Nuevas características y juegos se añaden constantemente. ¡Gracias por su visita y comentarios!" },
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -112,7 +119,14 @@ const renderGames = () => {
 const setLanguage = (lang) => {
     localStorage.setItem('language', lang);
     htmlElement.lang = lang;
+    const langConfig = languages[lang] || languages.pt;
     const langTranslations = translations[lang] || translations.pt;
+    
+    const currentLangDisplay = $('#current-lang-display');
+    if(currentLangDisplay) {
+        currentLangDisplay.innerHTML = `<img src="${langConfig.flag}" alt="${langConfig.name}" class="w-5 h-5 rounded-full mr-2">${langConfig.name}`;
+    }
+
     $$('[data-translate-key]').forEach(el => {
         const key = el.dataset.translateKey;
         const translation = langTranslations[key];
@@ -417,10 +431,33 @@ const handleBetaNotification = () => {
     }
 };
 
+const generateLangMenu = () => {
+    const langMenu = $('#langMenu');
+    if (!langMenu) return;
+    langMenu.innerHTML = Object.keys(languages).map(langKey => {
+        const lang = languages[langKey];
+        return `
+            <a href="#" class="lang-option flex items-center px-4 py-2 text-sm text-inherit" data-lang="${langKey}">
+                <img src="${lang.flag}" alt="${lang.name}" class="w-5 h-5 rounded-full mr-3">
+                <span>${lang.name}</span>
+            </a>
+        `;
+    }).join('');
+
+    $$('.lang-option').forEach(option => {
+        option.addEventListener('click', (e) => {
+            e.preventDefault();
+            setLanguage(e.currentTarget.dataset.lang);
+            $('#langMenu')?.classList.add('hidden');
+        });
+    });
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('selectedTheme') || 'gamer-dark';
     const savedLang = localStorage.getItem('language') || 'pt';
     
+    generateLangMenu();
     setLanguage(savedLang);
     generateThemePreviews();
     setTheme(savedTheme);
@@ -438,14 +475,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('hashchange', router);
     $('#mobileMenuBtn')?.addEventListener('click', () => $('#mobileMenu')?.classList.toggle('hidden'));
     $('#langBtn')?.addEventListener('click', () => $('#langMenu')?.classList.toggle('hidden'));
-    $$('.lang-option').forEach(option => {
-        option.addEventListener('click', (e) => {
-            e.preventDefault();
-            setLanguage(e.currentTarget.dataset.lang);
-            $('#langMenu')?.classList.add('hidden');
-        });
-    });
-
+    
     $('#themeSelectorBtn')?.addEventListener('click', () => $('#themeModal')?.classList.remove('hidden'));
     $('#closeThemeModalBtn')?.addEventListener('click', () => $('#themeModal')?.classList.add('hidden'));
     $('#themeModal .modal-backdrop')?.addEventListener('click', () => $('#themeModal')?.classList.add('hidden'));
