@@ -1,0 +1,200 @@
+/* ============================================= */
+/* --- Variáveis de Tema (Raiz) --- */
+/* ============================================= */
+:root,
+[data-theme='gamer-dark'] {
+    --background-color: #0D1117;
+    --card-background: rgba(15, 23, 42, 0.6);
+    --card-content-bg: rgba(15, 23, 42, 0.8);
+    --glass-background: rgba(30, 41, 59, 0.5);
+    --text-primary: #E2E8F0;
+    --text-muted: #94A3B8;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --accent-violet: #8b5cf6;
+    --accent-blue: #3b82f6;
+    --button-hover-bg: rgba(51, 65, 85, 0.8);
+    --button-bg: rgba(51, 65, 85, 0.6);
+    --category-tag-bg: rgba(139, 92, 246, 0.2);
+    --category-tag-text: #c4b5fd;
+    --header-hover-bg: #1e293b;
+}
+
+[data-theme='gamer-light'] {
+    --background-color: #e2e8f0;
+    --card-background: rgba(203, 213, 225, 0.6);
+    --card-content-bg: rgba(255, 255, 255, 0.8);
+    --glass-background: rgba(226, 232, 240, 0.7);
+    --text-primary: #1e293b;
+    --text-muted: #475569;
+    --border-color: rgba(148, 163, 184, 0.4);
+    --accent-violet: #8b5cf6;
+    --accent-blue: #3b82f6;
+    --button-hover-bg: #cbd5e1;
+    --button-bg: #e2e8f0;
+    --category-tag-bg: #ede9fe;
+    --category-tag-text: #6d28d9;
+    --header-hover-bg: #cbd5e1;
+}
+
+[data-theme='matrix-dark'] {
+    --background-color: #01100a;
+    --card-background: rgba(4, 29, 19, 0.7);
+    --card-content-bg: rgba(4, 29, 19, 0.9);
+    --glass-background: rgba(7, 46, 31, 0.5);
+    --text-primary: #39ff14;
+    --text-muted: #008f11;
+    --border-color: rgba(57, 255, 20, 0.2);
+    --accent-violet: #39ff14;
+    --accent-blue: #008f11;
+    --button-hover-bg: rgba(13, 71, 46, 0.8);
+    --button-bg: rgba(13, 71, 46, 0.6);
+    --category-tag-bg: rgba(57, 255, 20, 0.15);
+    --category-tag-text: #39ff14;
+    --header-hover-bg: #072e1f;
+}
+
+[data-theme='minty-light'] {
+    --background-color: #f0fdfa;
+    --card-background: rgba(204, 251, 241, 0.7);
+    --card-content-bg: rgba(240, 253, 250, 0.9);
+    --glass-background: rgba(204, 251, 241, 0.5);
+    --text-primary: #115e59;
+    --text-muted: #14b8a6;
+    --border-color: rgba(20, 184, 166, 0.3);
+    --accent-violet: #2dd4bf;
+    --accent-blue: #0d9488;
+    --button-hover-bg: #ccfbf1;
+    --button-bg: #f0fdfa;
+    --category-tag-bg: #ccfbf1;
+    --category-tag-text: #115e59;
+    --header-hover-bg: #ccfbf1;
+}
+
+/* ============================================= */
+/* --- Estilos Base --- */
+/* ============================================= */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
+    background-size: 20px 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+html[data-theme='gamer-light'] body, html[data-theme='minty-light'] body {
+     background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.05) 1px, transparent 0);
+}
+html[data-theme='matrix-dark'] body {
+    background-image: radial-gradient(circle at 1px 1px, rgba(57, 255, 20, 0.08) 1px, transparent 0);
+}
+
+.glass-effect {
+    background: var(--glass-background);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+}
+
+/* ============================================= */
+/* --- Componentes Reutilizáveis --- */
+/* ============================================= */
+.header-button { background-color: transparent; transition: background-color 0.2s; }
+.header-button:hover { background-color: var(--header-hover-bg); }
+.lang-option:hover { background-color: var(--header-hover-bg); }
+
+.glass-card {
+    background: var(--card-background);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    transition: background 0.4s, transform 0.4s, box-shadow 0.4s;
+}
+.glass-card img { transition: transform 0.4s ease; }
+.glass-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2), 0 0 15px var(--accent-violet);
+}
+.glass-card:hover img { transform: scale(1.05); }
+.card-content { background-color: var(--card-content-bg); }
+.card-button { background-color: var(--button-bg); color: var(--text-primary); transition: background-color 0.2s; }
+.card-button:hover { background-color: var(--button-hover-bg); }
+.category-tag { background-color: var(--category-tag-bg); color: var(--category-tag-text); }
+
+.category-filter { background-color: var(--button-bg); color: var(--text-muted); transition: background-color 0.2s, color 0.2s; }
+.category-filter:hover { background-color: var(--button-hover-bg); }
+.category-filter.active { background-color: var(--accent-violet); color: white !important; }
+
+.btn-gradient { background-image: linear-gradient(to right, var(--accent-blue), var(--accent-violet)); transition: all 0.3s ease; }
+.btn-gradient:hover { box-shadow: 0 0 20px var(--accent-violet); }
+
+/* ============================================= */
+/* --- Modais --- */
+/* ============================================= */
+.modal-backdrop { background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); transition: background-color 0.3s; }
+html[data-theme='gamer-light'] .modal-backdrop, html[data-theme='minty-light'] .modal-backdrop { background-color: rgba(30, 41, 59, 0.3); }
+
+.addon-item { background-color: var(--glass-background); border: 1px solid var(--border-color); color: var(--text-primary); }
+.addon-download-btn { background-color: var(--button-bg); transition: background-color 0.2s; }
+.addon-download-btn:hover { background-color: var(--button-hover-bg); }
+
+.theme-preview { border: 2px solid var(--border-color); cursor: pointer; transition: transform 0.2s, border-color 0.2s; }
+.theme-preview:hover { transform: scale(1.05); border-color: var(--accent-violet); }
+.theme-preview.active { border-color: var(--accent-blue); box-shadow: 0 0 15px var(--accent-blue); }
+
+.theme-preview .palette-bg { width: 25%; background-color: var(--background-color); }
+.theme-preview .palette-accent1 { width: 25%; background-color: var(--accent-blue); }
+.theme-preview .palette-accent2 { width: 25%; background-color: var(--accent-violet); }
+.theme-preview .palette-button { width: 25%; background-color: var(--button-bg); }
+.theme-preview .preview-text { color: var(--text-primary); }
+.theme-preview .preview-icon { color: var(--text-muted); }
+
+/* ============================================= */
+/* --- Animações e Outros --- */
+/* ============================================= */
+.hero-background { background: linear-gradient(-45deg, #0D1117, #1E293B, #3730A3, #0D1117); background-size: 400% 400%; animation: gradientBG 15s ease infinite; }
+@keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+html[data-theme='gamer-light'] .hero-background { background: linear-gradient(-45deg, #e2e8f0, #cbd5e1, #94a3b8); }
+html[data-theme='matrix-dark'] .hero-background { background: linear-gradient(-45deg, #01100a, #008f11, #39ff14, #01100a); }
+html[data-theme='minty-light'] .hero-background { background: linear-gradient(-45deg, #f0fdfa, #ccfbf1, #5eead4); }
+
+html:not([data-theme='gamer-dark']):not([data-theme='matrix-dark']) .hero-background h1, 
+html:not([data-theme='gamer-dark']):not([data-theme='matrix-dark']) .hero-background p {
+    color: #0D1117;
+    text-shadow: none;
+}
+
+#searchInput { width: 0; opacity: 0; transition: all 0.5s ease-in-out; border: 1px solid transparent; }
+#searchInput.active { width: 200px; padding-left: 1rem; padding-right: 1rem; opacity: 1; border: 1px solid var(--border-color); }
+@media (max-width: 640px) { #searchInput.active { width: 120px; } }
+#category-filter-bar::-webkit-scrollbar { display: none; }
+#category-filter-bar { -ms-overflow-style: none; scrollbar-width: none; }
+.category-container.is-overflowing::after {
+    content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 40px;
+    background: linear-gradient(to left, var(--card-content-bg), transparent);
+    pointer-events: none; transition: opacity 0.3s, background 0.3s;
+}
+
+/* Animação do Hero */
+@keyframes fadeIn-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-animated-text {
+    animation: fadeIn-up 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.hero-animated-text.h1 {
+    animation-delay: 0.2s;
+}
+
+.hero-animated-text.p {
+    animation-delay: 0.4s;
+}
