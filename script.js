@@ -48,7 +48,7 @@ const gamesData = [
             linkvertise: "https://linkvertise.com/your-link",
             encurtanet: "https://encurta.net/your-link"
         },
-        hasInfo: false
+        hasInfo: true
     },
 ];
 
