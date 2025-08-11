@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="style.css?v=1.1">
+    <link rel="stylesheet" href="style.css?v=1.2">
 </head>
 <body class="transition-colors duration-300">
 
@@ -84,20 +84,46 @@
                     <h1 class="text-4xl md:text-6xl font-extrabold text-white drop-shadow-lg hero-animated-text h1" data-translate-key="hero_title">Sua Aventura Começa com um Download</h1>
                     <p class="mt-4 text-lg text-slate-300 max-w-2xl mx-auto hero-animated-text p" data-translate-key="hero_subtitle">Acesso direto aos melhores jogos e APKs. Rápido, seguro e selecionado pela comunidade.</p>
                 </section>
-                <section class="mt-12 relative">
-                    <div class="relative group">
-                        <button id="scroll-left" class="scroll-btn left-0 hidden sm:flex"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
-                        <div id="category-filter-bar" class="flex items-center gap-3 overflow-x-auto whitespace-nowrap py-2 scroll-smooth"></div>
-                        <button id="scroll-right" class="scroll-btn right-0 hidden sm:flex"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
+
+                <!-- Discord Banner Section -->
+                <section id="discord-banner" class="discord-banner mt-12 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="flex items-center gap-4">
+                        <img src="https://i.ibb.co/xSK265Yz/discord-logo-discord-logo-transparent-discord-icon-transparent-free-free-png.webp" alt="Ícone do Discord" class="w-12 h-12 md:w-16 md:h-16">
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-bold text-white" data-translate-key="discord_banner_title">Junte-se à nossa comunidade!</h2>
+                            <p class="text-slate-300" data-translate-key="discord_banner_subtitle">Participe das conversas, receba suporte e fique por dentro das novidades.</p>
+                        </div>
+                    </div>
+                    <a href="https://discord.gg/your-invite-code" target="_blank" rel="noopener noreferrer" class="discord-join-btn" data-translate-key="discord_join_button">
+                        Entrar no Discord
+                        <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
+                    </a>
+                </section>
+
+                <section class="mt-12">
+                    <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+                        <div class="relative group w-full sm:w-auto flex-grow">
+                             <button id="scroll-left" class="scroll-btn left-0 hidden sm:flex"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+                             <div id="category-filter-bar" class="flex items-center gap-3 overflow-x-auto whitespace-nowrap py-2 scroll-smooth"></div>
+                             <button id="scroll-right" class="scroll-btn right-0 hidden sm:flex"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
+                        </div>
+                        <div class="relative">
+                            <select id="sort-by" class="sort-select">
+                                <option value="default" data-translate-key="sort_default">Padrão</option>
+                                <option value="popular" data-translate-key="sort_popular">Mais Populares</option>
+                                <option value="recent" data-translate-key="sort_recent">Adicionados Recentemente</option>
+                            </select>
+                        </div>
                     </div>
                 </section>
+
                 <div class="mt-8">
-                    <section>
+                    <section id="featured-section">
                         <h2 class="text-3xl font-bold mb-6 section-title" data-translate-key="featured_games_title">Jogos em Destaque</h2>
                         <div id="featured-games-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5"></div>
                     </section>
-                    <section class="mt-16">
-                        <h2 class="text-3xl font-bold mb-6 section-title" data-translate-key="all_games_title">Todos os Jogos</h2>
+                    <section id="all-games-section" class="mt-16">
+                        <h2 id="all-games-title" class="text-3xl font-bold mb-6 section-title" data-translate-key="all_games_title">Todos os Jogos</h2>
                         <div id="all-games-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 sm:gap-5"></div>
                         <div id="view-all-container" class="text-center mt-8 hidden">
                             <button id="view-all-btn" class="btn-gradient text-white px-8 py-3 rounded-lg font-bold" data-translate-key="view_all_button">Ver Todos</button>
@@ -105,7 +131,7 @@
                         <div id="noResultsMessage" class="hidden text-center col-span-full py-10">
                             <i data-lucide="frown" class="w-16 h-16 mx-auto text-muted"></i>
                             <h3 class="mt-4 text-xl font-semibold" data-translate-key="no_results_title">Nenhum jogo encontrado</h3>
-                            <p class="text-muted" data-translate-key="no_results_subtitle">Tente pesquisar com outros termos.</p>
+                            <p class="text-muted" data-translate-key="no_results_subtitle">Tente pesquisar com outros termos ou alterar os filtros.</p>
                         </div>
                     </section>
                 </div>
@@ -271,8 +297,8 @@
                     <a href="#privacy" class="text-sm text-muted hover:text-primary transition-colors" data-translate-key="nav_privacy">Privacidade</a>
                 </div>
                 <div class="flex items-center space-x-4 mt-4 sm:mt-0">
-                    <a href="#" aria-label="Discord" class="text-muted hover:text-primary transition-colors">
-                        <img src="https://i.ibb.co/xSK265Yz/discord-logo-discord-logo-transparent-discord-icon-transparent-free-free-png.webp" alt="Discord Logo" class="w-6 h-6">
+                    <a href="https://discord.gg/your-invite-code" target="_blank" rel="noopener noreferrer" aria-label="Discord" class="text-muted hover:text-primary transition-colors">
+                        <img src="https://i.ibb.co/xSK265Yz/discord-logo-discord-logo-transparent-discord-icon-transparent-free-free-png.webp" alt="Ícone do Discord" class="w-6 h-6">
                     </a>
                 </div>
             </div>
@@ -306,6 +332,6 @@
         </div>
     </div>
 
-    <script src="script.js?v=1.1"></script>
+    <script src="script.js?v=1.2"></script>
 </body>
 </html>
