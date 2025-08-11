@@ -15,6 +15,8 @@
     --category-tag-text: #c4b5fd;
     --header-hover-bg: #1e293b;
     --discord-banner-bg: linear-gradient(135deg, var(--accent-blue), var(--accent-violet));
+    --discord-title-color: #ffffff;
+    --discord-subtitle-color: #e2e8f0;
 }
 
 [data-theme='gamer-light'] {
@@ -33,6 +35,8 @@
     --category-tag-text: #6d28d9;
     --header-hover-bg: #cbd5e1;
     --discord-banner-bg: linear-gradient(135deg, var(--accent-blue), var(--accent-violet));
+    --discord-title-color: #ffffff;
+    --discord-subtitle-color: #e2e8f0;
 }
 
 [data-theme='matrix-dark'] {
@@ -50,7 +54,9 @@
     --category-tag-bg: rgba(57, 255, 20, 0.15);
     --category-tag-text: #39ff14;
     --header-hover-bg: #072e1f;
-    --discord-banner-bg: linear-gradient(135deg, #008f11, #39ff14);
+    --discord-banner-bg: linear-gradient(135deg, #072e1f, #01100a);
+    --discord-title-color: #39ff14;
+    --discord-subtitle-color: #008f11;
 }
 
 [data-theme='minty-light'] {
@@ -69,6 +75,8 @@
     --category-tag-text: #115e59;
     --header-hover-bg: #ccfbf1;
     --discord-banner-bg: linear-gradient(135deg, var(--accent-blue), var(--accent-violet));
+    --discord-title-color: #ffffff;
+    --discord-subtitle-color: #f0fdfa;
 }
 
 body {
@@ -364,20 +372,20 @@ html:not([data-theme='gamer-dark']):not([data-theme='matrix-dark']) .hero-backgr
 .discord-banner {
     background: var(--discord-banner-bg);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
 }
 .discord-banner:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
 }
 
-.discord-banner .text-white {
+.discord-banner-title {
+    color: var(--discord-title-color);
     text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
 
-html[data-theme='gamer-light'] .discord-banner .text-white,
-html[data-theme='minty-light'] .discord-banner .text-white {
-    color: #ffffff;
+.discord-banner-subtitle {
+    color: var(--discord-subtitle-color);
 }
 
 .discord-join-btn {
