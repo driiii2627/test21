@@ -301,11 +301,11 @@ const initCategoryAnimation = () => {
 };
 
 const updateFilters = () => {
-    const searchInput = $('#desktopSearchInput');
+    const desktopSearchInput = $('#desktopSearchInput');
     const mobileSearchInput = $('#mobileSearchInput');
-    if (!searchInput || !mobileSearchInput) return;
+    if (!desktopSearchInput || !mobileSearchInput) return;
 
-    const searchTerm = searchInput.value.toLowerCase() || mobileSearchInput.value.toLowerCase();
+    const searchTerm = desktopSearchInput.value.toLowerCase() || mobileSearchInput.value.toLowerCase();
     const activeCategory = $('.category-filter.active')?.dataset.category;
     const isFiltering = searchTerm.length > 0 || (activeCategory && activeCategory !== 'Todos');
 
