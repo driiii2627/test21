@@ -30,7 +30,7 @@
 
             <div class="flex items-center space-x-2 sm:space-x-4">
                 <div class="hidden sm:flex items-center">
-                    <input id="searchInput" type="text" placeholder="Pesquisar..." data-translate-key="search_placeholder" class="bg-transparent rounded-lg py-2 focus:outline-none focus:ring-2" style="--ring-color: var(--accent-violet);">
+                    <input id="desktopSearchInput" type="text" placeholder="Pesquisar..." data-translate-key="search_placeholder" class="bg-transparent rounded-lg py-2 focus:outline-none focus:ring-2" style="--ring-color: var(--accent-violet);">
                     <button id="searchBtn" class="header-button p-2 rounded-full">
                         <i data-lucide="search" class="w-5 h-5 text-muted"></i>
                     </button>
@@ -78,7 +78,15 @@
                     <h1 class="text-4xl md:text-6xl font-extrabold text-white drop-shadow-lg hero-animated-text h1" data-translate-key="hero_title">Sua Aventura Começa com um Download</h1>
                     <p class="mt-4 text-lg text-slate-300 max-w-2xl mx-auto hero-animated-text p" data-translate-key="hero_subtitle">Acesso direto aos melhores jogos e APKs. Rápido, seguro e selecionado pela comunidade.</p>
                 </section>
-                <section class="mt-12 relative">
+                
+                <section class="mt-8 sm:hidden">
+                    <div class="relative">
+                        <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted"></i>
+                        <input id="mobileSearchInput" type="text" placeholder="Pesquisar jogos e APKs..." data-translate-key="search_placeholder_mobile" class="w-full glass-effect rounded-lg py-3 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-[var(--accent-violet)]">
+                    </div>
+                </section>
+
+                <section class="mt-6 relative">
                     <div class="relative group">
                         <button id="scroll-left" class="scroll-btn left-0 hidden sm:flex"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
                         <div id="category-filter-bar" class="flex items-center gap-3 overflow-x-auto whitespace-nowrap py-2 scroll-smooth"></div>
