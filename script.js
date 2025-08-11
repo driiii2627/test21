@@ -301,10 +301,11 @@ const initCategoryAnimation = () => {
 };
 
 const updateFilters = () => {
-    const searchInput = $('#searchInput');
-    if (!searchInput) return;
+    const searchInput = $('#desktopSearchInput');
+    const mobileSearchInput = $('#mobileSearchInput');
+    if (!searchInput || !mobileSearchInput) return;
 
-    const searchTerm = searchInput.value.toLowerCase();
+    const searchTerm = searchInput.value.toLowerCase() || mobileSearchInput.value.toLowerCase();
     const activeCategory = $('.category-filter.active')?.dataset.category;
     const isFiltering = searchTerm.length > 0 || (activeCategory && activeCategory !== 'Todos');
 
@@ -613,8 +614,9 @@ document.addEventListener('DOMContentLoaded', () => {
     renderApks();
     setupScrollAnimations();
 
-    $('#searchBtn')?.addEventListener('click', () => { $('#searchInput')?.classList.toggle('active'); $('#searchInput')?.focus(); });
-    $('#searchInput')?.addEventListener('input', updateFilters);
+    $('#searchBtn')?.addEventListener('click', () => { $('#desktopSearchInput')?.classList.toggle('active'); $('#desktopSearchInput')?.focus(); });
+    $('#desktopSearchInput')?.addEventListener('input', updateFilters);
+    $('#mobileSearchInput')?.addEventListener('input', updateFilters);
     $('#view-all-btn')?.addEventListener('click', () => {
         $$('#all-games-grid .game-wrapper').forEach(w => w.classList.remove('hidden'));
         $('#view-all-container')?.classList.add('hidden');
